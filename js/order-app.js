@@ -15,7 +15,7 @@
 
   const FALLBACK_MENU = [
     { id: 'banh-mi-dac-biet',  name: '招牌法包',       category: '法包',     price: 0, tbd: true, image: 'images/banh-mi-dac-biet.jpg',  desc: '越式扎肉、肝醬、醃菜及芫荽' },
-    { id: 'banh-mi-thap-cam',  name: '特色法包',       category: '法包',     price: 0, tbd: true, image: 'images/banh-mi-thap-cam.jpg',  desc: '扎肉、醃菜及青瓜絲' },
+    { id: 'banh-mi-thap-cam',  name: '特色法包',       category: '法包',     price: 39, tbd: false, image: 'images/banh-mi-thap-cam.jpg',  desc: '扎肉、醃菜及青瓜絲' },
     { id: 'banh-mi-xiu-mai',   name: '肉丸叉燒法包',   category: '法包',     price: 0, tbd: true, image: 'images/banh-mi-xiu-mai.jpg',   desc: '手打肉丸、叉燒及越式醃菜' },
     { id: 'banh-mi-xa-xiu',    name: '叉燒法包',       category: '法包',     price: 0, tbd: true, image: 'images/banh-mi-xa-xiu.jpg',    desc: '香烤叉燒配越式醃菜及芫荽' },
     { id: 'banh-mi-ga',        name: '燒雞法包',       category: '法包',     price: 0, tbd: true, image: 'images/banh-mi-ga.jpg',        desc: '燒雞肉配特製醬汁' },
