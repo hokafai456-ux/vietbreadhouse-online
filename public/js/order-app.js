@@ -171,8 +171,10 @@
   function openCart() {
     renderCartItems();
     $('backdrop').hidden = false;
+    $('cartSheet').hidden = false;
     $('cartSheet').style.display = 'flex';
     $('paySheet').hidden = true;
+    $('paySheet').style.display = 'none';
     document.body.style.overflow = 'hidden';
   }
 
@@ -194,7 +196,9 @@
 
   function openPay() {
     $('paySheet').hidden = false;
+    $('paySheet').style.display = 'flex';
     $('cartSheet').style.display = 'none';
+    $('cartSheet').hidden = true;
     updatePaymentPanel();
   }
 
