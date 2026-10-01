@@ -5,7 +5,7 @@
   let menu = [];
   let cart = [];       // [{id, name, image, price, tbd, qty}]
   let activeCategory = '全部';
-  let activeMethod = 'fps';
+  let activeMethod = 'alipay';
 
   // ── DOM helpers ────────────────────────────────────
   const $ = id => document.getElementById(id);
@@ -155,11 +155,27 @@
     $('paySheet').hidden = true;
     document.body.style.overflow = 'hidden';
   }
+
+  function updatePaymentPanel() {
+    const total = cartTotal();
+    const displayAmount = total > 0 ? money(total) : '價格待定';
+    $('payAmount').textContent = displayAmount;
+
+    if (activeMethod === 'alipay') {
+      if ($('alipayPanel')) $('alipayPanel').hidden = false;
+      if ($('fpsPanel')) $('fpsPanel').hidden = true;
+      if ($('alipayTargetAmount')) $('alipayTargetAmount').textContent = total > 0 ? money(total) : '價格待定 (請向店員查詢)';
+    } else if (activeMethod === 'fps') {
+      if ($('alipayPanel')) $('alipayPanel').hidden = true;
+      if ($('fpsPanel')) $('fpsPanel').hidden = false;
+      loadFPSQR();
+    }
+  }
+
   function openPay() {
-    $('payAmount').textContent = cartTotal() > 0 ? money(cartTotal()) : '價格待定';
     $('paySheet').hidden = false;
     $('cartSheet').style.display = 'none';
-    loadFPSQR();
+    updatePaymentPanel();
   }
 
   // ── FPS QR ─────────────────────────────────────────
@@ -168,7 +184,7 @@
     if (total <= 0) {
       $('qrLoading').hidden = true;
       $('qrError').hidden = false;
-      $('qrError').textContent = '菜式價格尚未設定，請直接向員工查詢';
+      $('qrError').textContent = '菜式價格尚未設定，請使用 AlipayHK 或向員工查詢';
       $('confirmPayBtn').disabled = true;
       return;
     }
@@ -179,7 +195,7 @@
       const res = await fetch('/api/fps-qr', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ amount: total / 1 }) // HKD amount (price already in HKD)
+        body: JSON.stringify({ amount: total / 1 }) // HKD amount
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
@@ -189,15 +205,18 @@
       $('confirmPayBtn').disabled = false;
     } catch (err) {
       $('qrLoading').hidden = true;
-      $('qrError').textContent = err.message || '無法生成 QR，請向員工付款';
+      $('qrError').textContent = err.message || '無法生成 FPS QR，請使用 AlipayHK';
       $('qrError').hidden = false;
     }
   }
 
   // ── Submit order ───────────────────────────────────
-  async function submitOrder() {
-    $('confirmPayBtn').disabled = true;
-    $('confirmPayBtn').textContent = '提交中…';
+  async function submitOrder(e) {
+    const btn = e?.currentTarget || $('confirmPayBtn');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '提交訂單中…';
+
     try {
       const res = await fetch('/api/orders', {
         method: 'POST',
@@ -211,6 +230,7 @@
       });
       const data = await res.json();
       if (data.error) throw new Error(data.error);
+
       // Show success
       closeSheets();
       $('cartSheet').style.display = '';
@@ -220,8 +240,9 @@
       updateCartUI();
     } catch (err) {
       alert('提交失敗：' + err.message);
-      $('confirmPayBtn').disabled = false;
-      $('confirmPayBtn').textContent = '✅ 我已付款，確認下單';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
     }
   }
 
@@ -256,7 +277,8 @@
   });
   $('checkoutBtn').addEventListener('click', openPay);
   $('backToCart').addEventListener('click', openCart);
-  $('confirmPayBtn').addEventListener('click', submitOrder);
+  if ($('confirmPayBtn')) $('confirmPayBtn').addEventListener('click', submitOrder);
+  if ($('confirmAlipayBtn')) $('confirmAlipayBtn').addEventListener('click', submitOrder);
   $('newOrderBtn').addEventListener('click', () => {
     $('successScreen').hidden = true;
   });
@@ -267,7 +289,7 @@
       document.querySelectorAll('.pay-method-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeMethod = btn.dataset.method;
-      if (activeMethod === 'fps') loadFPSQR();
+      updatePaymentPanel();
     });
   });
 

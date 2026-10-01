@@ -198,27 +198,44 @@ textarea { font: inherit; }
 .pay-logo { width: 38px; height: 38px; border-radius: 10px;
   display: grid; place-items: center; font-size: 13px; font-weight: 900; color: white; }
 .fps-logo { background: #e8232a; font-size: 11px; }
+.alipay-logo { background: #1677ff; font-size: 18px; font-weight: 900; }
 .wechat-logo { background: #07c160; font-size: 20px; }
 .oct-logo { background: #00843d; font-size: 20px; }
 
-/* FPS QR panel */
-.fps-panel { padding: 0 20px 20px; text-align: center; }
-.fps-hint { font-size: 13px; line-height: 1.6; color: var(--muted); margin-bottom: 16px; }
+/* FPS & Alipay QR panels */
+.fps-panel, .alipay-panel { padding: 0 20px 20px; text-align: center; }
+.fps-hint, .alipay-hint { font-size: 13px; line-height: 1.6; color: var(--muted); margin-bottom: 14px; }
 .fps-hint strong { color: var(--brand); }
+.alipay-hint strong { color: #1677ff; }
+.highlight-amount { font-size: 22px; font-weight: 900; }
 .qr-wrap {
   width: 240px; height: 240px; margin: 0 auto 14px;
   border: 2px solid var(--line); border-radius: 16px;
   display: grid; place-items: center; background: white;
   overflow: hidden;
 }
-.qr-wrap img { width: 220px; height: 220px; }
+.qr-wrap img { width: 220px; height: 220px; object-fit: contain; }
 .qr-loading { color: var(--muted); font-size: 14px; }
 .qr-error { color: #a3342c; font-size: 13px; padding: 12px; }
-.fps-name { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+.fps-name, .alipay-name { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+
+.pay-instruction-box {
+  background: #f0f7ff; border: 1px solid #bae0ff; border-radius: 12px;
+  padding: 12px 14px; text-align: left; font-size: 12px; line-height: 1.6;
+  margin-bottom: 16px; color: #1f3b64;
+}
+.pay-instruction-box ol { margin: 6px 0 0 16px; }
+
 .confirm-pay-btn {
   width: 100%; min-height: 52px; border-radius: 14px;
   background: var(--green); color: white; font-size: 16px; font-weight: 900;
   box-shadow: 0 6px 16px rgba(40,112,79,.3);
+  transition: opacity .2s;
+}
+.confirm-pay-btn:disabled { opacity: .6; cursor: not-allowed; }
+.alipay-confirm-btn {
+  background: #1677ff;
+  box-shadow: 0 6px 16px rgba(22,119,255,.3);
 }
 
 /* ── Sticky bar ───────────────────────────────────── */

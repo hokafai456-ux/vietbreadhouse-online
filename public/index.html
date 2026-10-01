@@ -78,14 +78,13 @@
     <strong id="payAmount">HK$0</strong>
   </div>
   <div class="pay-methods">
-    <button class="pay-method-btn active" data-method="fps">
+    <button class="pay-method-btn active" data-method="alipay">
+      <span class="pay-logo alipay-logo">支</span>
+      <span>Alipay HK</span>
+    </button>
+    <button class="pay-method-btn" data-method="fps">
       <span class="pay-logo fps-logo">FPS</span>
       <span>轉數快</span>
-    </button>
-    <button class="pay-method-btn coming" data-method="alipay" disabled>
-      <img src="/images/alipay-icon.svg" alt="" onerror="this.style.display='none'">
-      <span>Alipay HK</span>
-      <small>即將推出</small>
     </button>
     <button class="pay-method-btn coming" data-method="wechat" disabled>
       <span class="pay-logo wechat-logo">W</span>
@@ -99,8 +98,29 @@
     </button>
   </div>
 
+  <!-- Alipay HK QR panel -->
+  <div class="alipay-panel" id="alipayPanel">
+    <p class="alipay-hint">
+      請用 <strong>AlipayHK (支付寶香港)</strong> 掃碼轉賬付款<br>
+      應付金額：<strong class="highlight-amount" id="alipayTargetAmount">待定</strong>
+    </p>
+    <div class="qr-wrap alipay-qr-wrap">
+      <img id="alipayQrImg" src="/images/alipay-qr.png" alt="AlipayHK 收款碼">
+    </div>
+    <p class="alipay-name">收款對象：<strong>向對方展示收款碼 (越南法包屋)</strong></p>
+    <div class="pay-instruction-box">
+      <strong>💡 付款指引：</strong>
+      <ol>
+        <li>打開 AlipayHK App 掃描上方收款碼</li>
+        <li>確認收款戶口並轉賬應付金額</li>
+        <li>付款後點擊下方按鈕送出訂單</li>
+      </ol>
+    </div>
+    <button class="confirm-pay-btn alipay-confirm-btn" id="confirmAlipayBtn">✅ 我已使用 AlipayHK 付款，確認下單</button>
+  </div>
+
   <!-- FPS QR panel -->
-  <div class="fps-panel" id="fpsPanel">
+  <div class="fps-panel" id="fpsPanel" hidden>
     <p class="fps-hint">請用銀行 App 掃描以下 QR 碼付款<br><strong>金額已自動填好，只需確認送出</strong></p>
     <div class="qr-wrap" id="qrWrap">
       <div class="qr-loading" id="qrLoading">生成中…</div>
