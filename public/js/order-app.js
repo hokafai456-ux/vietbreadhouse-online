@@ -262,9 +262,11 @@
 
     // Show success
     closeSheets();
-    $('cartSheet').style.display = '';
+    $('cartSheet').style.display = 'none';
+    $('paySheet').style.display = 'none';
     $('successOrderId').textContent = orderId;
     $('successScreen').hidden = false;
+    $('successScreen').style.display = 'grid';
     cart = [];
     updateCartUI();
     btn.disabled = false;
@@ -306,6 +308,9 @@
   if ($('confirmAlipayBtn')) $('confirmAlipayBtn').addEventListener('click', submitOrder);
   $('newOrderBtn').addEventListener('click', () => {
     $('successScreen').hidden = true;
+    $('successScreen').style.display = 'none';
+    document.body.style.overflow = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   // Payment method toggle

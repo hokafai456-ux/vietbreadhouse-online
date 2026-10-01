@@ -12,6 +12,7 @@
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 html { background: var(--bg); color: #261712; }
 body {
   font-family: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
