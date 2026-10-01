@@ -1,0 +1,20 @@
+{
+  "name": "vietbreadhouse-online",
+  "version": "1.0.0",
+  "description": "越南法包屋 自助點餐系統",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "ws": "^8.16.0",
+    "dotenv": "^16.4.5",
+    "qrcode": "^1.5.3",
+    "nanoid": "^3.3.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

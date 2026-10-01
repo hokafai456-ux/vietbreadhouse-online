@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#6f2f1e">
+  <title>越南法包屋 · 線上點餐</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="app-header">
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-icon">🥖</span>
+      <div>
+        <strong>越南法包屋</strong>
+        <small>Vietnam Banh Mi House</small>
+      </div>
+    </div>
+    <button class="cart-btn" id="cartBtn" aria-label="查看購物車">
+      <span class="cart-icon">🛒</span>
+      <span class="cart-badge" id="cartBadge" hidden>0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-sub">新鮮製作 · 即場外賣</p>
+    <h1>正宗越南風味</h1>
+  </div>
+</section>
+
+<!-- ── MENU ── -->
+<main class="menu-main" id="menuView">
+  <nav class="cat-tabs" id="catTabs" role="tablist"></nav>
+  <div class="menu-grid" id="menuGrid"></div>
+</main>
+
+<!-- ── CART SHEET ── -->
+<div class="sheet-backdrop" id="backdrop" hidden></div>
+<aside class="cart-sheet" id="cartSheet" aria-label="購物車">
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <h2>我的訂單</h2>
+    <button class="close-btn" id="closeCart">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-note-wrap">
+    <label>
+      <span>備註</span>
+      <textarea id="orderNote" rows="2" placeholder="例如：走辣、少醬、盡快取餐時間…"></textarea>
+    </label>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total-row">
+      <span>合計</span>
+      <strong id="cartTotal">HK$0</strong>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn">前往付款</button>
+  </div>
+</aside>
+
+<!-- ── PAYMENT SHEET ── -->
+<aside class="cart-sheet pay-sheet" id="paySheet" aria-label="付款" hidden>
+  <div class="sheet-handle"></div>
+  <div class="sheet-head">
+    <button class="back-btn" id="backToCart">← 返回</button>
+    <h2>選擇付款</h2>
+  </div>
+  <div class="pay-amount-row">
+    <span>應付金額</span>
+    <strong id="payAmount">HK$0</strong>
+  </div>
+  <div class="pay-methods">
+    <button class="pay-method-btn active" data-method="fps">
+      <span class="pay-logo fps-logo">FPS</span>
+      <span>轉數快</span>
+    </button>
+    <button class="pay-method-btn coming" data-method="alipay" disabled>
+      <img src="/images/alipay-icon.svg" alt="" onerror="this.style.display='none'">
+      <span>Alipay HK</span>
+      <small>即將推出</small>
+    </button>
+    <button class="pay-method-btn coming" data-method="wechat" disabled>
+      <span class="pay-logo wechat-logo">W</span>
+      <span>WeChat Pay</span>
+      <small>即將推出</small>
+    </button>
+    <button class="pay-method-btn coming" data-method="octopus" disabled>
+      <span class="pay-logo oct-logo">○</span>
+      <span>手機八達通</span>
+      <small>即將推出</small>
+    </button>
+  </div>
+
+  <!-- FPS QR panel -->
+  <div class="fps-panel" id="fpsPanel">
+    <p class="fps-hint">請用銀行 App 掃描以下 QR 碼付款<br><strong>金額已自動填好，只需確認送出</strong></p>
+    <div class="qr-wrap" id="qrWrap">
+      <div class="qr-loading" id="qrLoading">生成中…</div>
+      <img id="qrImg" alt="FPS QR" hidden>
+      <div class="qr-error" id="qrError" hidden></div>
+    </div>
+    <p class="fps-name">收款人：<strong>越南法包屋</strong></p>
+    <button class="confirm-pay-btn" id="confirmPayBtn">✅ 我已付款，確認下單</button>
+  </div>
+</aside>
+
+<!-- ── SUCCESS ── -->
+<div class="success-screen" id="successScreen" hidden>
+  <div class="success-inner">
+    <div class="success-icon">🎉</div>
+    <h2>訂單已提交！</h2>
+    <p class="order-id-label">訂單編號</p>
+    <p class="order-id" id="successOrderId"></p>
+    <p class="success-msg">請保留此頁面，店員確認付款後會準備您的餐點。</p>
+    <button class="new-order-btn" id="newOrderBtn">繼續點餐</button>
+  </div>
+</div>
+
+<!-- ── STICKY CART BAR ── -->
+<div class="sticky-bar" id="stickyBar" hidden>
+  <button class="sticky-bar-btn" id="stickyBarBtn">
+    <span class="sb-count" id="sbCount">0 件</span>
+    <span>查看購物車</span>
+    <span class="sb-total" id="sbTotal">HK$0</span>
+  </button>
+</div>
+
+<script src="/js/order-app.js"></script>
+</body>
+</html>

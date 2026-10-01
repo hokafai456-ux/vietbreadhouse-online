@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>廚房顯示 · 越南法包屋</title>
+  <style>
+    :root { --brand:#6f2f1e; --green:#28704f; --accent:#ef8e2f; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:"Microsoft JhengHei",system-ui,sans-serif;
+      background:#1a1008; color:#fff; min-height:100vh; }
+    header { background:linear-gradient(120deg,#4f1c13,#7e351f);
+      padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+    header h1 { font-size:22px; font-weight:900; }
+    .status { font-size:13px; padding:5px 12px; border-radius:99px;
+      background:rgba(255,255,255,.12); }
+    .status.live { background:rgba(40,112,79,.5); color:#8effc0; }
+    main { padding:20px; display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+    .order-card { background:#2a1a10; border:1px solid #4a2e1e;
+      border-radius:16px; padding:16px; }
+    .order-card.new { border-color:var(--accent); box-shadow:0 0 0 2px var(--accent); }
+    .order-card.paid { border-color:var(--green); }
+    .order-card.done { opacity:.5; }
+    .oc-head { display:flex; justify-content:space-between; align-items:center;
+      margin-bottom:12px; }
+    .oc-id { font-size:22px; font-weight:900; color:var(--accent); }
+    .oc-time { font-size:12px; color:#c09070; }
+    .oc-badge { font-size:11px; font-weight:800; padding:3px 10px;
+      border-radius:99px; }
+    .badge-new { background:var(--accent); color:#fff; }
+    .badge-paid { background:var(--green); color:#fff; }
+    .badge-done { background:#444; color:#aaa; }
+    .oc-items { margin-bottom:12px; display:flex; flex-direction:column; gap:6px; }
+    .oc-item { display:flex; justify-content:space-between;
+      font-size:15px; font-weight:700; }
+    .oc-item-qty { color:var(--accent); font-weight:900; margin-right:8px; }
+    .oc-note { font-size:13px; color:#f6b07a; padding:8px 10px;
+      background:rgba(239,142,47,.12); border-radius:8px; margin-bottom:10px; }
+    .oc-total { display:flex; justify-content:space-between;
+      font-size:16px; font-weight:900; color:#fff; padding-top:10px;
+      border-top:1px dashed #4a2e1e; margin-bottom:12px; }
+    .oc-actions { display:flex; gap:8px; }
+    .oc-actions button { flex:1; min-height:40px; border:none; border-radius:10px;
+      font-size:14px; font-weight:800; cursor:pointer; }
+    .btn-print { background:#3a2518; color:#f6b07a; }
+    .btn-paid { background:var(--green); color:white; }
+    .btn-done { background:#444; color:#ccc; }
+    .empty { grid-column:1/-1; padding:80px 20px; text-align:center; color:#6a4a30; }
+    .empty span { display:block; font-size:48px; margin-bottom:12px; }
+    @media print {
+      body { background:white; color:#000; }
+      header,.oc-actions { display:none; }
+      .order-card { border:2px solid #000; page-break-inside:avoid;
+        color:#000; background:white; }
+      .oc-id,.oc-item-qty { color:#000; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>🍳 廚房顯示</h1>
+  <span class="status" id="wsStatus">連線中…</span>
+</header>
+<main id="ordersGrid">
+  <div class="empty"><span>📭</span>暫無新訂單</div>
+</main>
+<script src="/js/kitchen-app.js"></script>
+</body>
+</html>
