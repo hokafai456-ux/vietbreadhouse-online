@@ -32,8 +32,64 @@
     { id: 'bun-cha-gio',       name: '炸春卷乾撈米線', category: '乾撈米線', price: 10, tbd: false, image: 'images/bun-cha-gio.jpg',       desc: '脆皮春卷拌米線配豆芽及芫荽' },
   ];
 
+  // ── 從 localStorage 讀取價錢覆蓋 ──────────────────
+  function loadPriceOverrides() {
+    try {
+      const saved = localStorage.getItem('vbh_prices');
+      if (saved) {
+        const overrides = JSON.parse(saved);
+        FALLBACK_MENU.forEach(item => {
+          if (overrides[item.id] !== undefined) {
+            item.price = overrides[item.id];
+            item.tbd = false;
+          }
+        });
+      }
+    } catch(e) {}
+  }
+
+  function savePriceOverride(id, price) {
+    try {
+      const saved = localStorage.getItem('vbh_prices');
+      const overrides = saved ? JSON.parse(saved) : {};
+      overrides[id] = price;
+      localStorage.setItem('vbh_prices', JSON.stringify(overrides));
+    } catch(e) {}
+  }
+
+  // ── 長撳改價錢 ──────────────────────────────────────
+  let longPressTimer = null;
+  function setupLongPress() {
+    const grid = $('menuGrid');
+    
+    grid.addEventListener('pointerdown', e => {
+      const card = e.target.closest('.menu-card');
+      if (!card) return;
+      
+      longPressTimer = setTimeout(() => {
+        const id = card.dataset.id;
+        const item = menu.find(i => i.id === id);
+        if (!item) return;
+        
+        const newPrice = prompt(`修改「${item.name}」嘅價錢：\n（輸入數字，例如 38）`, item.price || 10);
+        if (newPrice !== null && !isNaN(newPrice) && Number(newPrice) > 0) {
+          item.price = Number(newPrice);
+          item.tbd = false;
+          savePriceOverride(id, Number(newPrice));
+          renderMenu();
+          showToast(`${item.name} 已改為 HK$${newPrice}`);
+        }
+      }, 800); // 長撳 0.8 秒觸發
+    });
+
+    grid.addEventListener('pointerup', () => clearTimeout(longPressTimer));
+    grid.addEventListener('pointerleave', () => clearTimeout(longPressTimer));
+    grid.addEventListener('pointermove', () => clearTimeout(longPressTimer));
+  }
+
   // ── Load menu ──────────────────────────────────────
   async function loadMenu() {
+    loadPriceOverrides();
     try {
       const res = await fetch('/api/menu');
       if (!res.ok) throw new Error('API unavailable');
@@ -43,6 +99,7 @@
     }
     renderCatTabs();
     renderMenu();
+    setupLongPress();
   }
 
   function renderCatTabs() {
