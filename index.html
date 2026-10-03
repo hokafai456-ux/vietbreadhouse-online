@@ -4,156 +4,75 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#6f2f1e">
-  <title>越南法包屋 · 線上點餐</title>
+  <meta name="description" content="越南法包屋餐牌。現只接受電話預約自取。">
+  <title>越南法包屋 · 餐牌</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2">
+  <link rel="stylesheet" href="css/style.css?v=3">
 </head>
 <body>
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="#menu" aria-label="越南法包屋餐牌首頁">
+        <span class="brand-icon" aria-hidden="true">🥖</span>
+        <span>
+          <strong>越南法包屋</strong>
+          <small>VIET BREAD HOUSE</small>
+        </span>
+      </a>
+      <a class="call-top" href="tel:+85254888239">致電預約</a>
+    </div>
+  </header>
 
-<!-- ── HEADER ── -->
-<header class="app-header">
-  <div class="header-inner">
-    <div class="brand">
-      <span class="brand-icon">🥖</span>
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="hero-sub">越南法包外賣專門</p>
+      <h1 id="hero-title">電話預約自取</h1>
+      <p class="hero-copy">新鮮製作，請先致電確認取餐時間。</p>
+      <a class="call-hero" href="tel:+85254888239">立即致電 5488 8239</a>
+    </section>
+
+    <section class="offer" aria-label="電話自取優惠">
+      <span class="offer-badge">-30%</span>
       <div>
-        <strong>越南法包屋</strong>
-        <small>Vietnam Banh Mi House</small>
+        <strong>電話預約自取全單 7 折</strong>
+        <p>餐牌原價與外送平台相同；致電自取即享 30% 優惠。</p>
       </div>
-    </div>
-    <button class="cart-btn" id="cartBtn" aria-label="查看購物車">
-      <span class="cart-icon">🛒</span>
-      <span class="cart-badge" id="cartBadge" hidden>0</span>
-    </button>
-  </div>
-</header>
+    </section>
 
-<!-- ── HERO ── -->
-<section class="hero">
-  <div class="hero-text">
-    <p class="hero-sub">新鮮製作 · 即場外賣</p>
-    <h1>正宗越南風味</h1>
-  </div>
-</section>
+    <section class="menu-intro" id="menu" aria-labelledby="menu-title">
+      <p class="eyebrow">MENU</p>
+      <h2 id="menu-title">餐牌</h2>
+      <p>以下顯示外送平台參考價及電話自取價。網站暫不接受網上落單或付款。</p>
+    </section>
 
-<!-- ── MENU ── -->
-<main class="menu-main" id="menuView">
-  <nav class="cat-tabs" id="catTabs" role="tablist"></nav>
-  <div class="menu-grid" id="menuGrid"></div>
-</main>
+    <nav class="cat-tabs" id="catTabs" aria-label="餐牌分類"></nav>
+    <section class="menu-main" aria-label="餐牌內容">
+      <div class="menu-grid" id="menuGrid"></div>
+    </section>
 
-<!-- ── CART SHEET ── -->
-<div class="sheet-backdrop" id="backdrop" hidden></div>
-<aside class="cart-sheet" id="cartSheet" aria-label="購物車">
-  <div class="sheet-handle"></div>
-  <div class="sheet-head">
-    <h2>我的訂單</h2>
-    <button class="close-btn" id="closeCart">✕</button>
-  </div>
-  <div class="cart-items" id="cartItems"></div>
-  <div class="cart-note-wrap">
-    <label>
-      <span>備註</span>
-      <textarea id="orderNote" rows="2" placeholder="例如：走辣、少醬、盡快取餐時間…"></textarea>
-    </label>
-  </div>
-  <div class="cart-footer">
-    <div class="cart-total-row">
-      <span>合計</span>
-      <strong id="cartTotal">HK$0</strong>
-    </div>
-    <button class="checkout-btn" id="checkoutBtn">前往付款</button>
-  </div>
-</aside>
+    <section class="contact-card" aria-labelledby="contact-title">
+      <p class="eyebrow">PHONE PICKUP</p>
+      <h2 id="contact-title">致電預約自取</h2>
+      <p class="contact-note">請告訴同事菜式、數量及預計取餐時間。</p>
+      <a class="call-main" href="tel:+85254888239">5488 8239</a>
+      <p class="contact-secondary">批發查詢：<a href="tel:+85298350364">9835 0364</a></p>
+      <dl class="store-details">
+        <div><dt>營業時間</dt><dd>11:00–19:00（星期日休息）</dd></div>
+        <div><dt>地址</dt><dd>觀塘成業街 16 號怡生工業中心 H 座 1 樓 H08 室</dd></div>
+      </dl>
+    </section>
 
-<!-- ── PAYMENT SHEET ── -->
-<aside class="cart-sheet pay-sheet" id="paySheet" aria-label="付款" hidden>
-  <div class="sheet-handle"></div>
-  <div class="sheet-head">
-    <button class="back-btn" id="backToCart">← 返回</button>
-    <h2>選擇付款</h2>
-  </div>
-  <div class="pay-amount-row">
-    <span>應付金額</span>
-    <strong id="payAmount">HK$0</strong>
-  </div>
-  <div class="pay-methods">
-    <button class="pay-method-btn active" data-method="alipay">
-      <span class="pay-logo alipay-logo">支</span>
-      <span>Alipay HK</span>
-    </button>
-    <button class="pay-method-btn" data-method="fps">
-      <span class="pay-logo fps-logo">FPS</span>
-      <span>轉數快</span>
-    </button>
-    <button class="pay-method-btn coming" data-method="wechat" disabled>
-      <span class="pay-logo wechat-logo">W</span>
-      <span>WeChat Pay</span>
-      <small>即將推出</small>
-    </button>
-    <button class="pay-method-btn coming" data-method="octopus" disabled>
-      <span class="pay-logo oct-logo">○</span>
-      <span>手機八達通</span>
-      <small>即將推出</small>
-    </button>
-  </div>
+    <section class="social-card" aria-label="社交平台">
+      <a href="https://www.facebook.com/profile.php?id=61575582120326" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="https://www.instagram.com/vietbreadhouse.hk/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    </section>
+  </main>
 
-  <!-- Alipay HK QR panel -->
-  <div class="alipay-panel" id="alipayPanel">
-    <p class="alipay-hint">
-      請用 <strong>AlipayHK (支付寶香港)</strong> 掃碼轉賬付款<br>
-      應付金額：<strong class="highlight-amount" id="alipayTargetAmount">待定</strong>
-    </p>
-    <div class="qr-wrap alipay-qr-wrap">
-      <img id="alipayQrImg" src="images/alipay-qr.png" alt="AlipayHK 收款碼">
-    </div>
-    <p class="alipay-name">收款對象：<strong>向對方展示收款碼 (越南法包屋)</strong></p>
-    <div class="pay-instruction-box">
-      <strong>💡 付款指引：</strong>
-      <ol>
-        <li>打開 AlipayHK App 掃描上方收款碼</li>
-        <li>確認收款戶口並轉賬應付金額</li>
-        <li>付款後點擊下方按鈕送出訂單</li>
-      </ol>
-    </div>
-    <button class="confirm-pay-btn alipay-confirm-btn" id="confirmAlipayBtn">✅ 已經在 Alipay 付款，確認送出訂單</button>
-  </div>
+  <footer>
+    本網站現只供瀏覽餐牌及電話預約自取，並不提供網上付款或提交訂單功能。
+  </footer>
 
-  <!-- FPS QR panel -->
-  <div class="fps-panel" id="fpsPanel" hidden>
-    <p class="fps-hint">請用銀行 App 掃描以下 QR 碼付款<br><strong>金額已自動填好，只需確認送出</strong></p>
-    <div class="qr-wrap" id="qrWrap">
-      <div class="qr-loading" id="qrLoading">生成中…</div>
-      <img id="qrImg" alt="FPS QR" hidden>
-      <div class="qr-error" id="qrError" hidden></div>
-    </div>
-    <p class="fps-name">收款人：<strong>越南法包屋</strong></p>
-    <button class="confirm-pay-btn" id="confirmPayBtn">✅ 我已付款，確認下單</button>
-  </div>
-</aside>
-
-<!-- ── SUCCESS ── -->
-<div class="success-screen" id="successScreen" hidden>
-  <div class="success-inner">
-    <div class="success-icon">🎉</div>
-    <h2>訂單已提交！</h2>
-    <p class="order-id-label">訂單編號</p>
-    <p class="order-id" id="successOrderId"></p>
-    <p class="success-msg">請保留此頁面，店員確認付款後會準備您的餐點。</p>
-    <button class="new-order-btn" id="newOrderBtn">繼續點餐</button>
-  </div>
-</div>
-
-<!-- ── STICKY CART BAR ── -->
-<div class="sticky-bar" id="stickyBar" hidden>
-  <button class="sticky-bar-btn" id="stickyBarBtn">
-    <span class="sb-count" id="sbCount">0 件</span>
-    <span>查看購物車</span>
-    <span class="sb-total" id="sbTotal">HK$0</span>
-  </button>
-</div>
-
-<script src="js/order-app.js?v=8"></script>
+  <script src="js/order-app.js?v=9"></script>
 </body>
 </html>
-
