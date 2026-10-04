@@ -29,26 +29,26 @@ app.get('/kitchen', (req, res) => {
 // ── Menu API ──────────────────────────────────────────────
 const MENU = [
   // 法包
-  { id: 'banh-mi-dac-biet',  name: '招牌法包',       category: '法包',     price: 0, tbd: true, image: '/images/banh-mi-dac-biet.jpg',  desc: '越式扎肉、肝醬、醃菜及芫荽' },
-  { id: 'banh-mi-thap-cam',  name: '特色法包',       category: '法包',     price: 0, tbd: true, image: '/images/banh-mi-thap-cam.jpg',  desc: '扎肉、醃菜及青瓜絲' },
-  { id: 'banh-mi-xiu-mai',   name: '肉丸叉燒法包',   category: '法包',     price: 0, tbd: true, image: '/images/banh-mi-xiu-mai.jpg',   desc: '手打肉丸、叉燒及越式醃菜' },
-  { id: 'banh-mi-xa-xiu',    name: '叉燒法包',       category: '法包',     price: 0, tbd: true, image: '/images/banh-mi-xa-xiu.jpg',    desc: '香烤叉燒配越式醃菜及芫荽' },
-  { id: 'banh-mi-ga',        name: '燒雞法包',       category: '法包',     price: 0, tbd: true, image: '/images/banh-mi-ga.jpg',        desc: '燒雞肉配特製醬汁' },
+  { id: 'banh-mi-dac-biet',  name: '招牌法包',       category: '法包',     price: 78, image: '/images/banh-mi-dac-biet.jpg',  desc: '越式扎肉、肝醬、醃菜及芫荽' },
+  { id: 'banh-mi-thap-cam',  name: '特色法包',       category: '法包',     price: 68, image: '/images/banh-mi-thap-cam.jpg',  desc: '扎肉、醃菜及青瓜絲' },
+  { id: 'banh-mi-xiu-mai',   name: '肉丸叉燒法包',   category: '法包',     price: 68, image: '/images/banh-mi-xiu-mai.jpg',   desc: '手打肉丸、叉燒及越式醃菜' },
+  { id: 'banh-mi-xa-xiu',    name: '叉燒法包',       category: '法包',     price: 68, image: '/images/banh-mi-xa-xiu.jpg',    desc: '香烤叉燒配越式醃菜及芫荽' },
+  { id: 'banh-mi-ga',        name: '燒雞法包',       category: '法包',     price: 78, image: '/images/banh-mi-ga.jpg',        desc: '燒雞肉配特製醬汁' },
   // 小食
-  { id: 'cha-lua-plat',      name: '越式扎肉拼盤',   category: '小食',     price: 0, tbd: true, image: '/images/cha-lua-platcl.jpg',    desc: '越式扎肉及葉包糰拼盤' },
-  { id: 'nguyen-lieu-plat',  name: '越式配料拼盤',   category: '小食',     price: 0, tbd: true, image: '/images/nguyen-lieu-plat.jpg',  desc: '炸豆腐、葉包糰及雞蛋糕' },
-  { id: 'cha-lua',           name: '越式扎肉',       category: '小食',     price: 0, tbd: true, image: '/images/cha-lua.jpg',           desc: '越式豬肉腸' },
-  { id: 'cha-gio',           name: '越式炸春卷',     category: '小食',     price: 0, tbd: true, image: '/images/cha-gio.jpg',           desc: '香脆越式炸春卷' },
+  { id: 'cha-lua-plat',      name: '越式扎肉拼盤',   category: '小食',     price: 68, image: '/images/cha-lua-platcl.jpg',    desc: '越式扎肉及葉包糰拼盤' },
+  { id: 'nguyen-lieu-plat',  name: '越式配料拼盤',   category: '小食',     price: 68, image: '/images/nguyen-lieu-plat.jpg',  desc: '炸豆腐、葉包糰及雞蛋糕' },
+  { id: 'cha-lua',           name: '越式扎肉',       category: '小食',     price: 68, image: '/images/cha-lua.jpg',           desc: '越式豬肉腸' },
+  { id: 'cha-gio',           name: '越式炸春卷',     category: '小食',     price: 68, image: '/images/cha-gio.jpg',           desc: '香脆越式炸春卷' },
   // 越式米卷
-  { id: 'goi-cuon-tom',      name: '大蝦紙米卷',     category: '越式米卷', price: 0, tbd: true, image: '/images/goi-cuon-tom.jpg',      desc: '新鮮大蝦紙米卷配香草' },
+  { id: 'goi-cuon-tom',      name: '大蝦紙米卷',     category: '越式米卷', price: 68, image: '/images/goi-cuon-tom.jpg',      desc: '新鮮大蝦紙米卷配香草' },
   // 湯麵
-  { id: 'bun-chay',          name: '素湯米線',       category: '湯麵',     price: 0, tbd: true, image: '/images/bun-chay.jpg',          desc: '素湯底配豆腐及番茄' },
-  { id: 'bun-bo-vien',       name: '豬肉丸湯米線',   category: '湯麵',     price: 0, tbd: true, image: '/images/bun-bo-vien.jpg',       desc: '豬肉丸、血塊及炸豆腐' },
-  { id: 'bun-lon-tap-cam',   name: '豬雜湯米線',     category: '湯麵',     price: 0, tbd: true, image: '/images/bun-lon-tap-cam.jpg',   desc: '豬雜、豬扎肉、炸豆腐及肉丸' },
+  { id: 'bun-chay',          name: '素湯米線',       category: '湯麵',     price: 68, image: '/images/bun-chay.jpg',          desc: '素湯底配豆腐及番茄' },
+  { id: 'bun-bo-vien',       name: '豬肉丸湯米線',   category: '湯麵',     price: 68, image: '/images/bun-bo-vien.jpg',       desc: '豬肉丸、血塊及炸豆腐' },
+  { id: 'bun-lon-tap-cam',   name: '豬雜湯米線',     category: '湯麵',     price: 68, image: '/images/bun-lon-tap-cam.jpg',   desc: '豬雜、豬扎肉、炸豆腐及肉丸' },
   // 乾撈米線
-  { id: 'bun-xa-xiu-kho',    name: '燒肉乾撈米線',   category: '乾撈米線', price: 0, tbd: true, image: '/images/bun-xa-xiu-kho.jpg',    desc: '香脆燒豬頸肉拌米線' },
-  { id: 'bun-cha-gio-lon',   name: '炸春卷米線',     category: '乾撈米線', price: 0, tbd: true, image: '/images/bun-cha-gio-lon.jpg',   desc: '大春卷配米線及花生' },
-  { id: 'bun-cha-gio',       name: '炸春卷乾撈米線', category: '乾撈米線', price: 0, tbd: true, image: '/images/bun-cha-gio.jpg',       desc: '脆皮春卷拌米線配豆芽及芫荽' },
+  { id: 'bun-xa-xiu-kho',    name: '燒肉乾撈米線',   category: '乾撈米線', price: 68, image: '/images/bun-xa-xiu-kho.jpg',    desc: '香脆燒豬頸肉拌米線' },
+  { id: 'bun-cha-gio-lon',   name: '炸春卷米線',     category: '乾撈米線', price: 68, image: '/images/bun-cha-gio-lon.jpg',   desc: '大春卷配米線及花生' },
+  { id: 'bun-cha-gio',       name: '炸春卷乾撈米線', category: '乾撈米線', price: 68, image: '/images/bun-cha-gio.jpg',       desc: '脆皮春卷拌米線配豆芽及芫荽' },
 ];
 
 app.get('/api/menu', (req, res) => {
