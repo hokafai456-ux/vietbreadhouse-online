@@ -11,7 +11,7 @@
     { id: 'nguyen-lieu-plat', name: '越式配料拼盤', category: '小食', price: 68, image: 'images/nguyen-lieu-plat.jpg', desc: '炸豆腐、葉包糰及雞蛋糕' },
     { id: 'cha-lua', name: '越式扎肉', category: '小食', price: 68, image: 'images/cha-lua.jpg', desc: '越式豬肉腸' },
     { id: 'cha-gio', name: '越式炸春卷', category: '小食', price: 68, image: 'images/cha-gio.jpg', desc: '香脆越式炸春卷' },
-    { id: 'goi-cuon-tom', name: '大蝦紙米卷', category: '越式米卷', price: 68, image: 'images/goi-cuon-tom.jpg', desc: '新鮮大蝦紙米卷配香草' },
+    { id: 'goi-cuon-tom', name: '大蝦紙米卷', category: '越式米卷', price: 78, image: 'images/goi-cuon-tom.jpg', desc: '新鮮大蝦紙米卷配香草' },
     { id: 'bun-chay', name: '素湯米線', category: '湯麵', price: 68, image: 'images/bun-chay.jpg', desc: '素湯底配豆腐及番茄' },
     { id: 'bun-bo-vien', name: '豬肉丸湯米線', category: '湯麵', price: 68, image: 'images/bun-bo-vien.jpg', desc: '豬肉丸、血塊及炸豆腐' },
     { id: 'bun-lon-tap-cam', name: '豬雜湯米線', category: '湯麵', price: 68, image: 'images/bun-lon-tap-cam.jpg', desc: '豬雜、豬扎肉、炸豆腐及肉丸' },
