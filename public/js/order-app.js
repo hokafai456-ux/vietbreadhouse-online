@@ -16,8 +16,8 @@
     { id: 'bun-bo-vien', name: '豬肉丸湯米線', category: '湯麵', price: 68, image: 'images/bun-bo-vien.jpg', desc: '豬肉丸、血塊及炸豆腐' },
     { id: 'bun-lon-tap-cam', name: '豬雜湯米線', category: '湯麵', price: 68, image: 'images/bun-lon-tap-cam.jpg', desc: '豬雜、豬扎肉、炸豆腐及肉丸' },
     { id: 'bun-xa-xiu-kho', name: '燒肉乾撈米線', category: '乾撈米線', price: 68, image: 'images/bun-xa-xiu-kho.jpg', desc: '香脆燒豬頸肉拌米線' },
-    { id: 'bun-cha-gio-lon', name: '炸春卷米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio-lon.jpg', desc: '大春卷配米線及花生' },
-    { id: 'bun-cha-gio', name: '炸春卷乾撈米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio.jpg', desc: '脆皮春卷拌米線配豆芽及芫荽' },
+    { id: 'bun-cha-gio-lon', name: '大春卷乾撈米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio-lon.jpg', desc: '大春卷配米線及花生' },
+    { id: 'bun-cha-gio', name: '脆皮春卷乾撈米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio.jpg', desc: '脆皮春卷拌米線配豆芽及芫荽' },
   ];
 
   const $ = id => document.getElementById(id);
@@ -61,8 +61,8 @@
             <strong class="menu-card-name">${item.name}</strong>
             <p class="menu-card-desc">${item.desc}</p>
             <div class="price-stack" aria-label="${item.name} 價格">
-              <p class="platform-price"><span>外送平台參考價</span><strong>${money(item.price)}</strong></p>
-              <p class="pickup-price"><span>電話自取 <em>優惠價</em></span><strong>${money(pickupPrice)}</strong></p>
+              <p class="platform-price"><span>外賣平台參考價</span><strong>${money(item.price)}</strong></p>
+              <p class="pickup-price"><span>電話落單 <em>自取價</em></span><strong>${money(pickupPrice)}</strong></p>
             </div>
           </div>
         </article>`;

@@ -52,6 +52,8 @@ a { color: inherit; text-decoration: none; }
 .hero h1 { margin-top: 8px; font-size: clamp(30px, 7vw, 42px); line-height: 1.15; letter-spacing: -.03em; }
 .hero-copy { margin: 12px auto 20px; max-width: 28rem; color: #ffe9d2; font-size: 14px; }
 .call-hero { min-height: 50px; padding: 0 24px; background: #fff; color: var(--brand); box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+.hero-backup { margin-top: 12px; color: #ffe9d2; font-size: 13px; }
+.hero-backup a { color: inherit; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
 
 .offer {
   max-width: 728px; margin: -22px auto 0; position: relative; z-index: 1;
