@@ -23,22 +23,8 @@
   const $ = id => document.getElementById(id);
   let activeCategory = '全部';
 
-  // 舊版的長撳改價會把資料儲存在同一個瀏覽器的 localStorage。
-  // 這裡只讀取舊價，讓舊網站使用者不會因為新餐牌而立即失去價錢。
-  function legacyPriceOverrides() {
-    try {
-      const saved = JSON.parse(localStorage.getItem('vbh_prices') || '{}');
-      return saved && typeof saved === 'object' ? saved : {};
-    } catch (_) {
-      return {};
-    }
-  }
-
-  const legacyPrices = legacyPriceOverrides();
-  const menu = seedMenu.map(item => {
-    const savedPrice = Number(legacyPrices[item.id]);
-    return Number.isFinite(savedPrice) && savedPrice > 0 ? { ...item, price: savedPrice } : item;
-  });
+  // Use the published menu for every visitor, including browsers with old saved prices.
+  const menu = seedMenu;
 
   function money(value) {
     const rounded = Math.round(value * 100) / 100;
@@ -51,13 +37,13 @@
       `<button class="cat-tab${category === activeCategory ? ' active' : ''}" type="button" data-category="${category}">${category}</button>`
     ).join('');
 
-    $('catTabs').addEventListener('click', event => {
+    $('catTabs').onclick = event => {
       const button = event.target.closest('.cat-tab');
       if (!button) return;
       activeCategory = button.dataset.category;
       renderTabs();
       renderMenu();
-    });
+    };
   }
 
   function renderMenu() {
@@ -66,7 +52,7 @@
       : menu.filter(item => item.category === activeCategory);
 
     $('menuGrid').innerHTML = visibleItems.map(item => {
-      const pickupPrice = item.price * 0.7;
+      const pickupPrice = Math.round(item.price * 0.7);
       return `
         <article class="menu-card">
           <img class="menu-card-img" src="${item.image}" alt="${item.name}" loading="lazy">
@@ -76,7 +62,7 @@
             <p class="menu-card-desc">${item.desc}</p>
             <div class="price-stack" aria-label="${item.name} 價格">
               <p class="platform-price"><span>外送平台參考價</span><strong>${money(item.price)}</strong></p>
-              <p class="pickup-price"><span>電話自取 <em>-30%</em></span><strong>${money(pickupPrice)}</strong></p>
+              <p class="pickup-price"><span>電話自取 <em>優惠價</em></span><strong>${money(pickupPrice)}</strong></p>
             </div>
           </div>
         </article>`;

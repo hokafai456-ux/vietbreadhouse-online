@@ -17,26 +17,14 @@
     { id: 'bun-lon-tap-cam', name: '豬雜湯米線', category: '湯麵', price: 68, image: 'images/bun-lon-tap-cam.jpg', desc: '豬雜、豬扎肉、炸豆腐及肉丸' },
     { id: 'bun-xa-xiu-kho', name: '燒肉乾撈米線', category: '乾撈米線', price: 68, image: 'images/bun-xa-xiu-kho.jpg', desc: '香脆燒豬頸肉拌米線' },
     { id: 'bun-cha-gio-lon', name: '炸春卷米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio-lon.jpg', desc: '大春卷配米線及花生' },
-    { id: 'bun-cha-gio', name: '炸春卷米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio.jpg', desc: '脆皮春卷拌米線配豆芽及芫荽' },
+    { id: 'bun-cha-gio', name: '炸春卷乾撈米線', category: '乾撈米線', price: 68, image: 'images/bun-cha-gio.jpg', desc: '脆皮春卷拌米線配豆芽及芫荽' },
   ];
 
   const $ = id => document.getElementById(id);
   let activeCategory = '全部';
 
-  function legacyPriceOverrides() {
-    try {
-      const saved = JSON.parse(localStorage.getItem('vbh_prices') || '{}');
-      return saved && typeof saved === 'object' ? saved : {};
-    } catch (_) {
-      return {};
-    }
-  }
-
-  const legacyPrices = legacyPriceOverrides();
-  const menu = seedMenu.map(item => {
-    const savedPrice = Number(legacyPrices[item.id]);
-    return Number.isFinite(savedPrice) && savedPrice > 0 ? { ...item, price: savedPrice } : item;
-  });
+  // Use the published menu for every visitor, including browsers with old saved prices.
+  const menu = seedMenu;
 
   function money(value) {
     const rounded = Math.round(value * 100) / 100;
@@ -49,13 +37,13 @@
       `<button class="cat-tab${category === activeCategory ? ' active' : ''}" type="button" data-category="${category}">${category}</button>`
     ).join('');
 
-    $('catTabs').addEventListener('click', event => {
+    $('catTabs').onclick = event => {
       const button = event.target.closest('.cat-tab');
       if (!button) return;
       activeCategory = button.dataset.category;
       renderTabs();
       renderMenu();
-    });
+    };
   }
 
   function renderMenu() {
@@ -64,7 +52,7 @@
       : menu.filter(item => item.category === activeCategory);
 
     $('menuGrid').innerHTML = visibleItems.map(item => {
-      const pickupPrice = item.price * 0.7;
+      const pickupPrice = Math.round(item.price * 0.7);
       return `
         <article class="menu-card">
           <img class="menu-card-img" src="${item.image}" alt="${item.name}" loading="lazy">
@@ -74,7 +62,7 @@
             <p class="menu-card-desc">${item.desc}</p>
             <div class="price-stack" aria-label="${item.name} 價格">
               <p class="platform-price"><span>外送平台參考價</span><strong>${money(item.price)}</strong></p>
-              <p class="pickup-price"><span>電話自取 <em>-30%</em></span><strong>${money(pickupPrice)}</strong></p>
+              <p class="pickup-price"><span>電話自取 <em>優惠價</em></span><strong>${money(pickupPrice)}</strong></p>
             </div>
           </div>
         </article>`;
