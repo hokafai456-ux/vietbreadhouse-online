@@ -61,9 +61,20 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
 }
 
 test('root and public sources stay identical', () => {
-  for (const file of ['index.html', 'js/order-app.js']) {
+  for (const file of ['index.html', 'js/order-app.js', 'css/style.css']) {
     assert.equal(fs.readFileSync(path.join(root, file), 'utf8'), fs.readFileSync(path.join(root, 'public', file), 'utf8'));
   }
+});
+
+test('social links stay correct and prominent at the bottom', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.equal((html.match(/class="social-card"/g) || []).length, 1);
+  assert.ok(html.indexOf('class="social-card"') > html.indexOf('class="contact-card"'));
+  assert.ok(html.indexOf('class="social-card"') < html.indexOf('</main>'));
+  assert.ok(html.includes('https://www.facebook.com/profile.php?id=61575582120326'));
+  assert.ok(html.includes('https://www.instagram.com/vietbreadhouse.hk/'));
+  assert.ok(html.includes('class="social-link social-facebook"'));
+  assert.ok(html.includes('class="social-link social-instagram"'));
 });
 
 test('discount scope and rounding are explained together', () => {

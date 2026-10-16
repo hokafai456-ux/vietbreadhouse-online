@@ -120,9 +120,37 @@ a { color: inherit; text-decoration: none; }
 .store-details dd { margin-top: 2px; color: #4d403a; font-size: 13px; }
 
 .social-card {
-  max-width: 728px; margin: 14px auto 34px; padding: 0 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  max-width: 728px; margin: 24px auto 32px; padding: 20px;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: #fff; box-shadow: 0 6px 20px rgba(71,43,26,.06);
 }
-.social-card a { min-height: 46px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--brand); font-size: 13px; font-weight: 900; }
+.social-card h2 { color: var(--brand); font-size: 21px; line-height: 1.3; }
+.social-note { margin-top: 5px; color: var(--muted); font-size: 13px; }
+.social-links { margin-top: 15px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.social-link {
+  min-width: 0; min-height: 76px; padding: 14px 16px;
+  display: flex; align-items: center; gap: 12px; border-radius: 13px;
+  color: #fff; box-shadow: 0 4px 12px rgba(30,30,60,.15);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.social-facebook { background: #1456b8; }
+.social-instagram { background: linear-gradient(120deg, #622f98, #9b285b 64%, #a83c27); }
+.social-icon { flex: 0 0 28px; width: 28px; height: 28px; }
+.social-label { min-width: 0; }
+.social-label strong { display: block; font-size: 18px; font-weight: 900; line-height: 1.3; }
+.social-label small { display: block; margin-top: 3px; font-size: 11px; }
+.social-arrow { margin-left: auto; font-size: 24px; line-height: 1; }
+.social-link:hover { transform: translateY(-2px); box-shadow: 0 7px 16px rgba(30,30,60,.23); }
+.social-link:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+@media (max-width: 479px) {
+  .social-card { margin: 20px 16px 28px; padding: 18px; }
+  .social-links { grid-template-columns: 1fr; gap: 10px; }
+  .social-link { min-height: 68px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .social-link { transition: none; }
+  .social-link:hover { transform: none; }
+}
 
 footer { padding: 20px; color: #8a766d; background: #f5eee7; text-align: center; font-size: 12px; }
 
