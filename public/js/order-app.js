@@ -14,7 +14,7 @@
     { id: 'banh-mi-nuong-muoi-ot', name: '法包屋香辣烤法包', category: '法包', price: 78, image: 'images/menu-new-08-20261016.png', desc: '香辣烤法包' },
     { id: 'banh-mi-bate-gio-thit-nuong', name: '巴地燒肉扎肉越南法包', category: '法包', price: 78, image: 'images/menu-new-09-20261016.png', desc: '巴地、燒肉、扎肉' },
     { id: 'banh-mi-trung-op-la', name: '越式雜錦太陽蛋配法包', category: '法包', price: 78, image: 'images/menu-new-10-20261016.png', desc: '巴地、香腸、扎肉、太陽蛋及法包' },
-    { id: 'banh-mi-bo-la-dua-cha-bong', name: '法包屋・斑蘭牛油肉鬆', category: '法包', price: 72, image: 'images/menu-new-11-20261016.png', desc: '斑蘭牛油、肉鬆配法包' },
+    { id: 'banh-mi-bo-la-dua-cha-bong', name: '法包屋・斑蘭牛油肉鬆', category: '法包', price: 62, image: 'images/menu-new-11-20261016.png', desc: '斑蘭牛油、肉鬆配法包' },
     { id: 'banh-mi-dac-biet', name: '招牌法包', category: '法包', price: 78, image: 'images/banh-mi-dac-biet.jpg', desc: '越式扎肉、肝醬、醃菜及芫荽' },
     { id: 'banh-mi-thap-cam', name: '傳統法包', category: '法包', price: 68, image: 'images/banh-mi-thap-cam.jpg', desc: '扎肉、豬肉、醃菜及青瓜絲' },
     { id: 'banh-mi-xiu-mai', name: '肉丸叉燒法包', category: '法包', price: 68, image: 'images/banh-mi-xiu-mai.jpg', desc: '手打肉丸、叉燒及越式醃菜' },
