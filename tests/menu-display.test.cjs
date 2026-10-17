@@ -73,7 +73,9 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), Array.from({ length: 9 }, (_, i) => 'D' + String(i + 1).padStart(2, '0')));
     cards(nodes.menuGrid.innerHTML).forEach((card, i) => {
       assert.equal(Number(card.match(/class="platform-price">.*?<strong>HK\$(\d+)/s)[1]), approvedDrinkPrices[i][1]);
-      assert.ok(!card.includes('<img'), 'Do not invent drink photos or pack sizes');
+      assert.match(card, /<img class="menu-card-img" src="images\/drink-[^"]+-20261018\.(png|jpg)"/);
+      assert.match(card, /class="menu-card-desc" lang="en">[^<]+</);
+      assert.match(card, /class="menu-card-code">D\d{2}<\/span>飲品<\/span>/);
     });
     select('全部');
     assert.deepEqual(names(nodes.menuGrid.innerHTML), all);
@@ -86,9 +88,10 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
       if (image) {
         assert.ok(fs.existsSync(path.join(root, image[1])));
         assert.ok(fs.existsSync(path.join(root, 'public', image[1])));
-      } else {
-        assert.match(card, /data-code="D\d{2}"/);
+        assert.deepEqual(fs.readFileSync(path.join(root, image[1])), fs.readFileSync(path.join(root, 'public', image[1])));
       }
+      assert.ok(image, 'Every visible item has an image');
+      if (!card.includes('data-code="D')) assert.match(card, /class="menu-card-code">[ABC]\d{2}<\/span><\/span>/);
     }
   });
 
@@ -98,7 +101,7 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     for (const removed of ['lang="vi"', 'menu-localization', 'menu-card-name-translation', 'Platform reference', 'Giá trên ứng dụng', 'Gọi món']) {
       assert.ok(!html.includes(removed));
     }
-    assert.equal((html.match(/class="menu-card-desc" lang="en"/g) || []).length, 18);
+    assert.equal((html.match(/class="menu-card-desc" lang="en"/g) || []).length, 27);
     const first = cards(html)[0];
     assert.ok(first.includes('Betel-leaf beef rolls and Vietnamese pork sausage'));
     assert.ok(!first.includes('荖葉牛肉卷、扎肉配法包'));

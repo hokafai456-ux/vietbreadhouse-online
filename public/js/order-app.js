@@ -25,15 +25,15 @@
     { id: 'bun-xa-xiu-kho', name: '香脆豬頸肉乾撈米線', category: '米線', price: 68, image: 'images/bun-xa-xiu-kho.jpg', desc: '香脆豬頸肉拌米線' },
     { id: 'bun-cha-gio-lon', name: '大春卷乾撈米線', category: '米線', price: 68, image: 'images/bun-cha-gio-lon.jpg', desc: '大春卷配米線及花生', hidden: true },
     { id: 'bun-cha-gio', name: '脆皮春卷乾撈米線', category: '米線', price: 68, image: 'images/bun-cha-gio.jpg', desc: '脆皮春卷拌米線配豆芽及芫荽' },
-    { id: 'drink-coke-zero', name: '無糖可樂', category: '飲品', price: 15 },
-    { id: 'drink-coca-cola', name: '可口可樂', category: '飲品', price: 15 },
-    { id: 'drink-lemon-tea', name: '檸檬茶', category: '飲品', price: 14 },
-    { id: 'drink-oolong-tea', name: '烏龍茶', category: '飲品', price: 17 },
-    { id: 'drink-smooth-coffee', name: '香滑咖啡', category: '飲品', price: 16 },
-    { id: 'drink-unsweetened-coffee', name: '無糖咖啡', category: '飲品', price: 16 },
-    { id: 'drink-7up', name: '七喜', category: '飲品', price: 15 },
-    { id: 'drink-sprite', name: '雪碧', category: '飲品', price: 15 },
-    { id: 'drink-pear-coconut', name: '雪梨海底椰', category: '飲品', price: 18 },
+    { id: 'drink-coke-zero', name: '無糖可樂', englishName: 'Coca-Cola No Sugar', category: '飲品', price: 15, image: 'images/drink-coke-zero-20261018.png' },
+    { id: 'drink-coca-cola', name: '可口可樂', englishName: 'Coca-Cola', category: '飲品', price: 15, image: 'images/drink-coca-cola-20261018.png' },
+    { id: 'drink-lemon-tea', name: '檸檬茶', englishName: 'Lemon Tea', category: '飲品', price: 14, image: 'images/drink-lemon-tea-20261018.png' },
+    { id: 'drink-oolong-tea', name: '烏龍茶', englishName: 'Oolong Tea', category: '飲品', price: 17, image: 'images/drink-oolong-tea-20261018.jpg' },
+    { id: 'drink-smooth-coffee', name: '香滑咖啡', englishName: 'NESCAFÉ Regular Coffee', category: '飲品', price: 16, image: 'images/drink-smooth-coffee-20261018.png' },
+    { id: 'drink-unsweetened-coffee', name: '無糖咖啡', englishName: 'Unsweetened Black Coffee', category: '飲品', price: 16, image: 'images/drink-unsweetened-coffee-20261018.png' },
+    { id: 'drink-7up', name: '七喜', englishName: '7UP', category: '飲品', price: 15, image: 'images/drink-7up-20261018.jpg' },
+    { id: 'drink-sprite', name: '雪碧', englishName: 'Sprite', category: '飲品', price: 15, image: 'images/drink-sprite-20261018.png' },
+    { id: 'drink-pear-coconut', name: '雪梨海底椰', englishName: 'Pear & Sea Coconut Drink', category: '飲品', price: 18, image: 'images/drink-pear-coconut-20261018.jpg' },
   ];
 
   const $ = id => document.getElementById(id);
@@ -158,7 +158,7 @@
     $('menuGrid').innerHTML = visibleItems.map(item => {
       const pickupPrice = Math.round(item.price * 0.7);
       const isChineseDescription = keepChineseIngredients.has(item.id);
-      const description = isChineseDescription ? item.desc : englishDescriptions[item.id];
+      const description = isChineseDescription ? item.desc : (item.englishName || englishDescriptions[item.id]);
       const descriptionHtml = description
         ? `<p class="menu-card-desc"${isChineseDescription ? '' : ' lang="en"'}>${escapeHtml(description)}</p>`
         : '';
@@ -166,10 +166,10 @@
         ? `<img class="menu-card-img" src="${item.image}" alt="${item.name}" loading="lazy">`
         : '';
       return `
-        <article class="menu-card${item.image ? '' : ' menu-card-drink'}" data-code="${item.code}">
+        <article class="menu-card${item.category === '飲品' ? ' menu-card-drink' : ''}" data-code="${item.code}">
           ${imageHtml}
           <div class="menu-card-body">
-            <span class="menu-card-cat"><span class="menu-card-code">${item.code}</span>${item.category}</span>
+            <span class="menu-card-cat"><span class="menu-card-code">${item.code}</span>${item.category === '飲品' ? item.category : ''}</span>
             <strong class="menu-card-name">${item.name}</strong>
             ${descriptionHtml}
             <div class="price-stack" aria-label="${item.name} 價格">

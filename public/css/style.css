@@ -101,7 +101,8 @@ a { color: inherit; text-decoration: none; }
 .menu-card-desc { min-height: 36px; margin-bottom: 10px; color: var(--muted); font-size: 12px; line-height: 1.45; overflow-wrap: anywhere; }
 .menu-card-desc[lang="en"] { font-size: 11px; }
 .menu-card-drink .menu-card-body { padding: 18px 14px; min-height: 176px; background: linear-gradient(145deg, #fff, #fff7ec); }
-.menu-card-drink .menu-card-name { margin-bottom: 18px; }
+.menu-card-drink .menu-card-img { object-fit: contain; padding: 12px; background: #fff; }
+.menu-card-drink .menu-card-name { margin-bottom: 5px; }
 .menu-card-body { display: flex; flex-direction: column; flex: 1; }
 .menu-card { display: flex; flex-direction: column; }
 .menu-card-img { flex: 0 0 auto; display: block; }
