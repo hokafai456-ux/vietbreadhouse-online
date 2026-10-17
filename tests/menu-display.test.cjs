@@ -146,7 +146,25 @@ test('discount and phone-only ordering remain, without old translation scripts',
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.ok(html.includes('不適用於外賣平台訂單，亦不能與平台優惠合併使用'));
   assert.ok(html.includes('七折後四捨五入至整數港元'));
-  assert.ok(html.includes('網站暫不提供網上落單及付款'));
+  assert.ok(!html.includes('網站暫不提供網上落單及付款'));
   assert.ok(html.includes('Phone pickup'));
   for (const removed of ['js/menu-translations.js', 'lang="vi"', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
+});
+
+test('catering and bread wholesale form a separate enquiry section before phone pickup', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.equal((html.match(/id="wholesale"/g) || []).length, 1);
+  assert.ok(html.includes('href="#wholesale"'));
+  const section = html.match(/<section class="wholesale-card"[\s\S]*?<\/section>/)[0];
+  assert.ok(section.includes('麵包批發'));
+  assert.ok(section.includes('到會訂餐'));
+  assert.ok(section.includes('用餐人數、日期及餐點需要'));
+  assert.ok(section.includes('所需數量及取貨日期'));
+  assert.ok(section.includes('href="tel:+85254888239"'));
+  assert.ok(section.includes('href="tel:+85298350364"'));
+  assert.ok(!/HK\$|Keeta|七折|最低訂量/.test(section));
+  assert.ok(html.indexOf('id="wholesale"') > html.indexOf('id="menuGrid"'));
+  assert.ok(html.indexOf('id="wholesale"') < html.indexOf('class="contact-card"'));
+  const { nodes } = render('js/order-app.js');
+  assert.ok(!nodes.menuGrid.innerHTML.includes('data-code="E'));
 });
