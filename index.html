@@ -8,7 +8,7 @@
   <title>越南法包屋 · 餐牌</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=5">
+  <link rel="stylesheet" href="css/style.css?v=6">
 </head>
 <body>
   <header class="app-header">
@@ -39,13 +39,17 @@
         <strong>電話落單・到店自取享七折</strong>
         <p>七折優惠只適用於直接致電本店落單並到店自取；不適用於外賣平台訂單，亦不能與平台優惠合併使用。</p>
         <p>自取價按每款菜式七折後四捨五入至整數港元，以餐牌列明價格為準。</p>
+        <p class="offer-translation" lang="vi">Giảm 30% chỉ khi gọi trực tiếp và tự đến lấy; không áp dụng cho đơn qua ứng dụng hoặc cộng dồn ưu đãi. Giá sau giảm được làm tròn đến HK$ nguyên theo từng món.</p>
+        <p class="offer-translation" lang="en">30% off direct phone orders collected in store only. Not valid on delivery-platform orders or combined with platform offers. Discounted prices are rounded to the nearest whole HK$ per item.</p>
       </div>
     </section>
 
     <section class="menu-intro" id="menu" aria-labelledby="menu-title">
       <p class="eyebrow">MENU</p>
-      <h2 id="menu-title">餐牌</h2>
+      <h2 id="menu-title">餐牌 <span class="menu-languages"><span lang="vi">Thực đơn</span> · <span lang="en">Menu</span></span></h2>
       <p>餐牌列有外賣平台參考價及電話落單自取優惠價。請致電落單；網站暫不提供網上落單及付款。</p>
+      <p class="menu-intro-translation" lang="vi">Gọi điện đặt món và tự đến lấy. Trang web chỉ hiển thị thực đơn, không nhận đặt món hoặc thanh toán trực tuyến.</p>
+      <p class="menu-intro-translation" lang="en">Call to order for pickup. This website is a menu only; online ordering and payment are unavailable.</p>
     </section>
 
     <nav class="cat-tabs" id="catTabs" aria-label="餐牌分類"></nav>
@@ -87,6 +91,7 @@
     瀏覽餐牌後請致電落單，再到店自取。網站暫不提供網上落單及付款。
   </footer>
 
-  <script src="js/order-app.js?v=20"></script>
+  <script src="js/menu-translations.js?v=1"></script>
+  <script src="js/order-app.js?v=21"></script>
 </body>
 </html>

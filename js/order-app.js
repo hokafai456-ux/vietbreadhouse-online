@@ -29,6 +29,19 @@
 
   const $ = id => document.getElementById(id);
   let activeCategory = '全部';
+  const translations = globalThis.VBH_MENU_TRANSLATIONS || {};
+  const categoryTranslations = {
+    '全部': { vi: 'Tất cả', en: 'All' },
+    '法包': { vi: 'Bánh mì', en: 'Baguettes' },
+    '小食': { vi: 'Món ăn nhẹ', en: 'Sides' },
+    '乾撈米線': { vi: 'Bún trộn', en: 'Dry vermicelli' },
+  };
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, character => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+    })[character]);
+  }
 
   // Keep temporarily hidden dishes in seedMenu so they can be restored later.
   const featuredOrder = [
@@ -55,9 +68,10 @@
 
   function renderTabs() {
     const cats = ['全部', ...new Set(menu.map(item => item.category))];
-    $('catTabs').innerHTML = cats.map(category =>
-      `<button class="cat-tab${category === activeCategory ? ' active' : ''}" type="button" data-category="${category}">${category}</button>`
-    ).join('');
+    $('catTabs').innerHTML = cats.map(category => {
+      const translatedCategory = categoryTranslations[category];
+      return `<button class="cat-tab${category === activeCategory ? ' active' : ''}" type="button" data-category="${category}"><span>${category}</span><small lang="vi">${translatedCategory.vi}</small><small lang="en">${translatedCategory.en}</small></button>`;
+    }).join('');
 
     $('catTabs').onclick = event => {
       const button = event.target.closest('.cat-tab');
@@ -75,6 +89,16 @@
 
     $('menuGrid').innerHTML = visibleItems.map(item => {
       const pickupPrice = Math.round(item.price * 0.7);
+      const translated = translations[item.id];
+      const localizedNames = translated ? `
+            <div class="menu-localization" lang="vi">
+              <strong class="menu-card-name-translation">${escapeHtml(translated.vi)}</strong>
+              <p class="menu-card-desc-translation">${escapeHtml(translated.viDesc)}</p>
+            </div>
+            <div class="menu-localization" lang="en">
+              <strong class="menu-card-name-translation">${escapeHtml(translated.en)}</strong>
+              <p class="menu-card-desc-translation">${escapeHtml(translated.enDesc)}</p>
+            </div>` : '';
       return `
         <article class="menu-card">
           <img class="menu-card-img" src="${item.image}" alt="${item.name}" loading="lazy">
@@ -82,9 +106,10 @@
             <span class="menu-card-cat">${item.category}</span>
             <strong class="menu-card-name">${item.name}</strong>
             <p class="menu-card-desc">${item.desc}</p>
+            ${localizedNames}
             <div class="price-stack" aria-label="${item.name} 價格">
-              <p class="platform-price"><span>外賣平台參考價</span><strong>${money(item.price)}</strong></p>
-              <p class="pickup-price"><span>電話落單 <em>自取價</em></span><strong>${money(pickupPrice)}</strong></p>
+              <p class="platform-price"><span>外賣平台參考價<small lang="vi">Giá trên ứng dụng</small><small lang="en">Platform reference</small></span><strong>${money(item.price)}</strong></p>
+              <p class="pickup-price"><span>電話落單 <em>自取價</em><small lang="vi">Gọi món, tự đến lấy</small><small lang="en">Phone pickup</small></span><strong>${money(pickupPrice)}</strong></p>
             </div>
           </div>
         </article>`;

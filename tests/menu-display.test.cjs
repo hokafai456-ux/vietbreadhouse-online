@@ -18,8 +18,11 @@ const expectedFirstSeven = [
 function render(relativePath) {
   const nodes = { catTabs: { innerHTML: '' }, menuGrid: { innerHTML: '' } };
   const source = fs.readFileSync(path.join(root, relativePath), 'utf8');
-  vm.runInNewContext(source, { document: { getElementById: id => nodes[id] } });
-  return { nodes, source };
+  const context = vm.createContext({ document: { getElementById: id => nodes[id] } });
+  const translationFile = path.join(root, path.dirname(relativePath), 'menu-translations.js');
+  vm.runInContext(fs.readFileSync(translationFile, 'utf8'), context);
+  vm.runInContext(source, context);
+  return { nodes, source, translations: context.VBH_MENU_TRANSLATIONS };
 }
 
 function names(html) {
@@ -28,7 +31,7 @@ function names(html) {
 
 for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
   test(relativePath + ': featured order, hidden dish and category migration', () => {
-    const { nodes, source } = render(relativePath);
+    const { nodes, source, translations } = render(relativePath);
     const all = names(nodes.menuGrid.innerHTML);
     assert.deepEqual(all.slice(0, 7), expectedFirstSeven);
     assert.equal(all.length, 22);
@@ -49,6 +52,15 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     assert.deepEqual(names(nodes.menuGrid.innerHTML), ['香脆豬頸肉乾撈米線', '脆皮春卷乾撈米線']);
     nodes.catTabs.onclick({ target: { closest: () => ({ dataset: { category: '全部' } }) } });
     assert.deepEqual(names(nodes.menuGrid.innerHTML), all);
+    assert.equal((nodes.menuGrid.innerHTML.match(/class="menu-localization" lang="vi"/g) || []).length, all.length);
+    assert.equal((nodes.menuGrid.innerHTML.match(/class="menu-localization" lang="en"/g) || []).length, all.length);
+    for (const match of source.matchAll(/\{ id: '([^']+)'/g)) {
+      const translated = translations[match[1]];
+      assert.ok(translated, 'Missing translation for ' + match[1]);
+      for (const field of ['vi', 'en', 'viDesc', 'enDesc']) {
+        assert.ok(typeof translated[field] === 'string' && translated[field].trim().length > 0);
+      }
+    }
     for (const card of nodes.menuGrid.innerHTML.split('<article').slice(1)) {
       const original = Number(card.match(/class="platform-price">.*?<strong>HK\$(\d+)/s)[1]);
       const pickup = Number(card.match(/class="pickup-price">.*?<strong>HK\$(\d+)/s)[1]);
@@ -61,9 +73,34 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
 }
 
 test('root and public sources stay identical', () => {
-  for (const file of ['index.html', 'js/order-app.js', 'css/style.css']) {
+  for (const file of ['index.html', 'js/order-app.js', 'js/menu-translations.js', 'css/style.css']) {
     assert.equal(fs.readFileSync(path.join(root, file), 'utf8'), fs.readFileSync(path.join(root, 'public', file), 'utf8'));
   }
+});
+
+test('owner Vietnamese wording and approved ingredients and prices are retained', () => {
+  const { nodes, translations, source } = render('js/order-app.js');
+  const ownerNames = {
+    'banh-mi-cha-ca': 'Bánh mì chả cá',
+    'banh-mi-cha-thit-nuong': 'Bánh mì chả thịt nướng',
+    'banh-mi-bo-bit-tet': 'Bánh mì bò bít tết',
+    'banh-mi-thit-nuong-jambon': 'Bánh mì thịt nướng jambon',
+    'banh-mi-gio-cha-jambon': 'Bánh mì thập cẩm giò chả jambon',
+    'banh-mi-nuong-muoi-ot': 'Bánh mì nướng muối ớt',
+    'banh-mi-bate-gio-thit-nuong': 'Bánh mì batê giò thịt nướng',
+    'banh-mi-bo-la-dua-cha-bong': 'Bánh mì đặc biệt sốt bơ lá dứa chà bông',
+    'banh-mi-bo-sot-vang': 'Bánh mì bò sốt vang',
+  };
+  for (const [id, name] of Object.entries(ownerNames)) assert.equal(translations[id].vi, name);
+  assert.ok(source.includes("name: '越式香好紅酒牛腩配法包'"));
+  assert.ok(nodes.menuGrid.innerHTML.includes('扎肉、豬肉、醃菜及青瓜絲'));
+  assert.ok(nodes.menuGrid.innerHTML.includes('巴地、香腸、扎肉、太陽蛋及法包'));
+  const pandan = nodes.menuGrid.innerHTML.split('<article').find(card => card.includes('法包屋・斑蘭牛油肉鬆'));
+  assert.ok(pandan.includes('HK$62'));
+  assert.ok(pandan.includes('HK$43'));
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.ok(html.indexOf('js/menu-translations.js') < html.indexOf('js/order-app.js'));
+  assert.ok(!html.includes('language-switch'));
 });
 
 test('social links stay correct and prominent at the bottom', () => {
