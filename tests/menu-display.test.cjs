@@ -21,7 +21,10 @@ const approvedDrinkPrices = [
 ];
 
 function render(relativePath) {
-  const nodes = { catTabs: { innerHTML: '' }, menuGrid: { innerHTML: '' } };
+  const nodes = {
+    catTabs: { innerHTML: '' }, menuGrid: { innerHTML: '' }, wholesale: { open: false },
+    wholesaleLink: { addEventListener(type, callback) { this[type] = callback; } },
+  };
   const source = fs.readFileSync(path.join(root, relativePath), 'utf8');
   vm.runInNewContext(source, { document: { getElementById: id => nodes[id] } });
   const select = category => nodes.catTabs.onclick({
@@ -151,17 +154,17 @@ test('discount and phone-only ordering remain, without old translation scripts',
   for (const removed of ['js/menu-translations.js', 'lang="vi"', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
 });
 
-test('catering and wholesale are collapsed by default, with a return-to-menu link', () => {
+test('bread wholesale is collapsed by default and catering is removed', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.equal((html.match(/id="wholesale"/g) || []).length, 1);
   assert.ok(!html.includes('wholesale-shortcut'));
   const section = html.match(/<details class="wholesale-card"[\s\S]*?<\/details>/)[0];
   assert.ok(!/<details[^>]*\bopen(?:\s|=|>)/.test(section));
-  assert.match(section, /<summary>[\s\S]*到會及麵包批發[\s\S]*<\/summary>/);
+  assert.match(section, /<summary>[\s\S]*麵包批發[\s\S]*<\/summary>/);
   assert.match(section, /class="return-menu" href="#menu">↑ 返回餐牌<\/a>/);
   assert.ok(section.includes('麵包批發'));
-  assert.ok(section.includes('到會訂餐'));
-  assert.ok(section.includes('用餐人數、日期及餐點需要'));
+  assert.ok(!html.includes('到會'));
+  assert.ok(!html.includes('餐牌列有外賣平台參考價及電話落單自取優惠價'));
   assert.ok(section.includes('所需數量及取貨日期'));
   assert.ok(section.includes('href="tel:+85254888239"'));
   assert.ok(section.includes('href="tel:+85298350364"'));
@@ -170,12 +173,16 @@ test('catering and wholesale are collapsed by default, with a return-to-menu lin
   assert.ok(html.indexOf('id="wholesale"') < html.indexOf('class="contact-card"'));
   const { nodes } = render('js/order-app.js');
   assert.ok(!nodes.menuGrid.innerHTML.includes('data-code="E'));
+  assert.equal(nodes.wholesale.open, false);
+  nodes.wholesaleLink.click();
+  assert.equal(nodes.wholesale.open, true);
 });
 
 test('header phone link is removed while main phone-order entry points remain', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const header = html.match(/<header[\s\S]*?<\/header>/)[0];
   assert.ok(!header.includes('tel:'));
+  assert.match(header, /id="wholesaleLink" href="#wholesale" aria-controls="wholesale">批發查詢<\/a>/);
   assert.ok(!html.includes('call-top'));
   assert.match(html, /class="call-hero" href="tel:\+85254888239"/);
   assert.match(html, /class="call-main" href="tel:\+85254888239"/);

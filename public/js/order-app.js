@@ -181,6 +181,13 @@
     }).join('');
   }
 
+  const wholesaleLink = $('wholesaleLink');
+  if (wholesaleLink) {
+    wholesaleLink.addEventListener('click', () => {
+      $('wholesale').open = true;
+    });
+  }
+
   renderTabs();
   renderMenu();
 })();
