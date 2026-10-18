@@ -151,11 +151,14 @@ test('discount and phone-only ordering remain, without old translation scripts',
   for (const removed of ['js/menu-translations.js', 'lang="vi"', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
 });
 
-test('catering and bread wholesale form a separate enquiry section before phone pickup', () => {
+test('catering and wholesale are collapsed by default, with a return-to-menu link', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.equal((html.match(/id="wholesale"/g) || []).length, 1);
-  assert.ok(html.includes('href="#wholesale"'));
-  const section = html.match(/<section class="wholesale-card"[\s\S]*?<\/section>/)[0];
+  assert.ok(!html.includes('wholesale-shortcut'));
+  const section = html.match(/<details class="wholesale-card"[\s\S]*?<\/details>/)[0];
+  assert.ok(!/<details[^>]*\bopen(?:\s|=|>)/.test(section));
+  assert.match(section, /<summary>[\s\S]*到會及麵包批發[\s\S]*<\/summary>/);
+  assert.match(section, /class="return-menu" href="#menu">↑ 返回餐牌<\/a>/);
   assert.ok(section.includes('麵包批發'));
   assert.ok(section.includes('到會訂餐'));
   assert.ok(section.includes('用餐人數、日期及餐點需要'));
@@ -167,4 +170,13 @@ test('catering and bread wholesale form a separate enquiry section before phone 
   assert.ok(html.indexOf('id="wholesale"') < html.indexOf('class="contact-card"'));
   const { nodes } = render('js/order-app.js');
   assert.ok(!nodes.menuGrid.innerHTML.includes('data-code="E'));
+});
+
+test('header phone link is removed while main phone-order entry points remain', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const header = html.match(/<header[\s\S]*?<\/header>/)[0];
+  assert.ok(!header.includes('tel:'));
+  assert.ok(!html.includes('call-top'));
+  assert.match(html, /class="call-hero" href="tel:\+85254888239"/);
+  assert.match(html, /class="call-main" href="tel:\+85254888239"/);
 });

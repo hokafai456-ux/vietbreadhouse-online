@@ -8,7 +8,7 @@
   <title>越南法包屋 · 餐牌</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=9">
+  <link rel="stylesheet" href="css/style.css?v=10">
 </head>
 <body>
   <header class="app-header">
@@ -20,7 +20,6 @@
           <small>VIET BREAD HOUSE</small>
         </span>
       </a>
-      <a class="call-top" href="tel:+85254888239">電話落單</a>
     </div>
   </header>
 
@@ -45,7 +44,6 @@
     <section class="menu-intro" id="menu" aria-labelledby="menu-title">
       <h2 id="menu-title">餐牌</h2>
       <p>餐牌列有外賣平台參考價及電話落單自取優惠價，請致電落單。</p>
-      <a class="wholesale-shortcut" href="#wholesale">歡迎到會及麵包批發查詢 →</a>
     </section>
 
     <nav class="cat-tabs" id="catTabs" aria-label="餐牌分類"></nav>
@@ -53,17 +51,21 @@
       <div class="menu-grid" id="menuGrid"></div>
     </section>
 
-    <section class="wholesale-card" id="wholesale" aria-labelledby="wholesale-title">
-      <p class="eyebrow">聚會訂餐・店舖合作</p>
-      <h2 id="wholesale-title">到會及麵包批發</h2>
-      <p class="wholesale-copy">好麵包，讓更多客人嚐到。</p>
-      <h3>到會訂餐</h3>
-      <p class="wholesale-details">歡迎公司聚餐、活動及聚會查詢。請提供用餐人數、日期及餐點需要，我們會與你商議餐單及安排。</p>
-      <h3>麵包批發</h3>
-      <p class="wholesale-details">歡迎餐廳、咖啡店及其他店舖洽談麵包批發。請告訴我們所需數量及取貨日期，我們會提供報價並商議供貨安排。</p>
-      <a class="wholesale-call" href="tel:+85254888239">致電查詢 5488 8239</a>
-      <p class="contact-secondary">如未能接通，請致電 <a href="tel:+85298350364">9835 0364</a></p>
-    </section>
+    <details class="wholesale-card" id="wholesale">
+      <summary>
+        <span id="wholesale-title">到會及麵包批發</span>
+        <span class="wholesale-toggle" aria-hidden="true">＋</span>
+      </summary>
+      <div class="wholesale-content">
+        <h3>到會訂餐</h3>
+        <p class="wholesale-details">歡迎公司聚餐、活動及聚會查詢。請提供用餐人數、日期及餐點需要，我們會與你商議餐單及安排。</p>
+        <h3>麵包批發</h3>
+        <p class="wholesale-details">歡迎餐廳、咖啡店及其他店舖洽談麵包批發。請告訴我們所需數量及取貨日期，我們會提供報價並商議供貨安排。</p>
+        <a class="wholesale-call" href="tel:+85254888239">致電查詢 5488 8239</a>
+        <p class="contact-secondary">如未能接通，請致電 <a href="tel:+85298350364">9835 0364</a></p>
+        <div class="wholesale-actions"><a class="return-menu" href="#menu">↑ 返回餐牌</a></div>
+      </div>
+    </details>
 
     <section class="contact-card" aria-labelledby="contact-title">
       <p class="eyebrow" lang="en">Phone pickup</p>
