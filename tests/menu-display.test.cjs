@@ -145,13 +145,37 @@ test('social links stay correct and prominent at the bottom', () => {
   assert.ok(html.includes('class="social-link social-instagram"'));
 });
 
-test('discount and phone-only ordering remain, without old translation scripts', () => {
+test('discount and phone-first ordering remain, without old translation scripts', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.ok(html.includes('不適用於外賣平台訂單，亦不能與平台優惠合併使用'));
   assert.ok(html.includes('七折後四捨五入至整數港元'));
   assert.ok(!html.includes('網站暫不提供網上落單及付款'));
-  assert.ok(html.includes('Phone pickup'));
+  assert.ok(html.includes('電話落單・到店自取'));
   for (const removed of ['js/menu-translations.js', 'lang="vi"', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
+});
+
+test('location is above categories and WhatsApp is secondary with collapsed terms', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const offer = html.match(/<details class="offer-details"[\s\S]*?<\/details>/)[0];
+  assert.ok(!/<details[^>]*\bopen(?:\s|=|>)/.test(offer));
+  assert.ok(offer.includes('<summary>優惠詳情</summary>'));
+  assert.ok(offer.includes('不適用於外賣平台訂單'));
+  assert.ok(offer.includes('四捨五入'));
+  assert.ok(html.indexOf('class="store-location"') < html.indexOf('id="catTabs"'));
+  assert.equal((html.match(/H座1樓H08室/g) || []).length, 1);
+  assert.ok(html.includes('11:00–19:00'));
+  assert.ok(html.includes('https://wa.me/85254888239'));
+  const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)[0];
+  const contact = html.match(/<section class="contact-card"[\s\S]*?<\/section>/)[0];
+  assert.ok(!hero.includes('wa.me'));
+  assert.ok(contact.includes('https://wa.me/85254888239'));
+  assert.ok(contact.includes('class="back-to-menu" href="#menu">↑ 返回餐牌</a>'));
+  assert.ok(!contact.includes('tel:'));
+  assert.ok(html.indexOf('class="contact-card"') > html.indexOf('id="menuGrid"'));
+  assert.ok(html.includes('收到訊息後，我們會盡快回覆確認；如趕時間，歡迎直接致電。'));
+  assert.ok(html.includes('https://www.google.com/maps/dir/?api=1&amp;destination='));
+  assert.ok(!html.includes('<iframe'));
+  assert.ok(!html.includes('hero-copy'));
 });
 
 test('bread wholesale is collapsed by default and catering is removed', () => {
@@ -178,12 +202,17 @@ test('bread wholesale is collapsed by default and catering is removed', () => {
   assert.equal(nodes.wholesale.open, true);
 });
 
-test('header phone link is removed while main phone-order entry points remain', () => {
+test('header phone link is removed while hero phone remains primary', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const header = html.match(/<header[\s\S]*?<\/header>/)[0];
   assert.ok(!header.includes('tel:'));
+  assert.ok(header.includes('class="header-links"'));
+  assert.ok(header.includes('class="whatsapp-top" href="#whatsapp-inquiry"'));
+  assert.ok(!header.includes('wa.me'));
+  assert.ok(html.includes('class="contact-card" id="whatsapp-inquiry"'));
+  assert.ok(!header.includes('WhatsApp 落單'));
   assert.match(header, /id="wholesaleLink" href="#wholesale" aria-controls="wholesale">批發查詢<\/a>/);
   assert.ok(!html.includes('call-top'));
   assert.match(html, /class="call-hero" href="tel:\+85254888239"/);
-  assert.match(html, /class="call-main" href="tel:\+85254888239"/);
+  assert.ok(!html.includes('class="call-main"'));
 });

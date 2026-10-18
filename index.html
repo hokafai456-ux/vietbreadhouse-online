@@ -8,7 +8,7 @@
   <title>越南法包屋 · 餐牌</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=11">
+  <link rel="stylesheet" href="css/style.css?v=12">
 </head>
 <body>
   <header class="app-header">
@@ -20,7 +20,11 @@
           <small>VIET BREAD HOUSE</small>
         </span>
       </a>
-      <a class="wholesale-top" id="wholesaleLink" href="#wholesale" aria-controls="wholesale">批發查詢</a>
+      <nav class="header-links" aria-label="查詢聯絡">
+        <a class="wholesale-top" id="wholesaleLink" href="#wholesale" aria-controls="wholesale">批發查詢</a>
+        <span aria-hidden="true">｜</span>
+        <a class="whatsapp-top" href="#whatsapp-inquiry" aria-label="查看 WhatsApp 查詢說明">WhatsApp</a>
+      </nav>
     </div>
   </header>
 
@@ -28,7 +32,6 @@
     <section class="hero" aria-labelledby="hero-title">
       <p class="hero-sub">越南法包外賣專門</p>
       <h1 id="hero-title">電話落單・到店自取</h1>
-      <p class="hero-copy">打電話揀餐，同事確認取餐時間，再到店領取。</p>
       <a class="call-hero" href="tel:+85254888239">致電落單 5488 8239</a>
       <p class="hero-backup">如未能接通，請致電 <a href="tel:+85298350364">9835 0364</a></p>
     </section>
@@ -37,9 +40,18 @@
       <span class="offer-badge">七折</span>
       <div>
         <strong>電話落單・到店自取享七折</strong>
-        <p>七折優惠只適用於直接致電本店落單並到店自取；不適用於外賣平台訂單，亦不能與平台優惠合併使用。</p>
-        <p>自取價按每款菜式七折後四捨五入至整數港元，以餐牌列明價格為準。</p>
+        <details class="offer-details">
+          <summary>優惠詳情</summary>
+          <p>七折優惠只適用於直接致電本店落單並到店自取；不適用於外賣平台訂單，亦不能與平台優惠合併使用。</p>
+          <p>自取價按每款菜式七折後四捨五入至整數港元，以餐牌列明價格為準。</p>
+        </details>
       </div>
+    </section>
+
+    <section class="store-location" aria-label="營業時間及自取地址">
+      <p class="store-hours">11:00–19:00 <span>｜星期日休息</span></p>
+      <p class="store-address">觀塘成業街16號<br>怡生工業中心 <strong>H座1樓H08室</strong></p>
+      <a class="maps-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=East%20Sun%20Industrial%20Centre%2C%2016%20Shing%20Yip%20Street%2C%20Kwun%20Tong%2C%20Hong%20Kong" target="_blank" rel="noopener noreferrer">Google Maps 導航 ↗</a>
     </section>
 
     <section class="menu-intro" id="menu" aria-labelledby="menu-title">
@@ -64,16 +76,13 @@
       </div>
     </details>
 
-    <section class="contact-card" aria-labelledby="contact-title">
-      <p class="eyebrow" lang="en">Phone pickup</p>
-      <h2 id="contact-title">電話落單・到店自取</h2>
-      <p class="contact-note">請告訴同事菜式、數量、特別要求及希望取餐時間；同事確認後，按約定時間到店領取。</p>
-      <a class="call-main" href="tel:+85254888239">5488 8239</a>
-      <p class="contact-secondary">如未能接通，請致電 <a href="tel:+85298350364">9835 0364</a></p>
-      <dl class="store-details">
-        <div><dt>營業時間</dt><dd>11:00–19:00（星期日休息）</dd></div>
-        <div><dt>地址</dt><dd>觀塘成業街 16 號怡生工業中心 H 座 1 樓 H08 室</dd></div>
-      </dl>
+    <section class="contact-card" id="whatsapp-inquiry" aria-labelledby="contact-title">
+      <h2 id="contact-title">唔方便致電？</h2>
+      <div class="contact-actions">
+        <p class="whatsapp-secondary"><a href="https://wa.me/85254888239" target="_blank" rel="noopener noreferrer">WhatsApp 查詢 ↗</a></p>
+        <a class="back-to-menu" href="#menu">↑ 返回餐牌</a>
+      </div>
+      <p class="whatsapp-note">收到訊息後，我們會盡快回覆確認；如趕時間，歡迎直接致電。</p>
     </section>
 
     <section class="social-card" aria-labelledby="social-title">
@@ -98,6 +107,6 @@
     瀏覽餐牌後請致電落單，再到店自取。
   </footer>
 
-  <script src="js/order-app.js?v=24"></script>
+  <script src="js/order-app.js?v=25"></script>
 </body>
 </html>
