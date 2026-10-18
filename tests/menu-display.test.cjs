@@ -168,6 +168,9 @@ test('location is above categories and WhatsApp is secondary with collapsed term
   const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)[0];
   const contact = html.match(/<section class="contact-card"[\s\S]*?<\/section>/)[0];
   assert.ok(!hero.includes('wa.me'));
+  assert.ok(hero.includes('class="store-location"'));
+  assert.ok(hero.includes('class="store-address" href="https://www.google.com/maps/dir/'));
+  assert.ok(!html.includes('class="maps-link"'));
   assert.ok(contact.includes('https://wa.me/85254888239'));
   assert.ok(contact.includes('class="back-to-menu" href="#menu">↑ 返回餐牌</a>'));
   assert.ok(!contact.includes('tel:'));
