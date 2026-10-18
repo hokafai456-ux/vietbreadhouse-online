@@ -179,6 +179,8 @@ test('location is above categories and WhatsApp is secondary with collapsed term
   assert.ok(html.includes('https://www.google.com/maps/dir/?api=1&amp;destination='));
   assert.ok(!html.includes('<iframe'));
   assert.ok(!html.includes('hero-copy'));
+  assert.ok(!html.includes('id="menu-title"'));
+  assert.match(html, /<div id="menu">\s*<nav class="cat-tabs" id="catTabs"/);
 });
 
 test('bread wholesale is collapsed by default and catering is removed', () => {
