@@ -22,7 +22,7 @@
     { id: 'cha-lua-plat', name: '越式扎肉拼盤', category: '小食', price: 68, image: 'images/cha-lua-platter-20261016-edited.png', desc: '越式扎肉切片拼盤' },
     { id: 'cha-gio', name: '越式炸春卷（三件）', category: '小食', price: 68, image: 'images/cha-gio.jpg', desc: '香脆越式炸春卷，每份三件' },
     { id: 'goi-cuon-tom', name: '大蝦紙米卷', category: '小食', price: 78, image: 'images/goi-cuon-tom.jpg', desc: '新鮮大蝦紙米卷配香草' },
-    { id: 'bun-xa-xiu-kho', name: '香脆豬頸肉乾撈米線', category: '米線', price: 68, image: 'images/bun-xa-xiu-kho.jpg', desc: '香脆豬頸肉拌米線' },
+    { id: 'bun-xa-xiu-kho', name: '越式烤肉丸撈檬', vietnameseName: 'Trộn thịt viên nướng', category: '米線', price: 68, image: 'images/bun-grilled-meatball-20261019.png', desc: '越式烤肉丸拌米線' },
     { id: 'bun-cha-gio-lon', name: '大春卷乾撈米線', category: '米線', price: 68, image: 'images/bun-cha-gio-lon.jpg', desc: '大春卷配米線及花生', hidden: true },
     { id: 'bun-cha-gio', name: '脆皮春卷乾撈米線', category: '米線', price: 68, image: 'images/bun-cha-gio.jpg', desc: '脆皮春卷拌米線配豆芽及芫荽' },
     { id: 'drink-coke-zero', name: '無糖可樂', englishName: 'Coca-Cola No Sugar', category: '飲品', price: 15, image: 'images/drink-coke-zero-20261018.png' },
@@ -94,7 +94,7 @@
     "cha-lua-plat": "A platter of sliced Vietnamese pork sausages",
     "cha-gio": "Crispy Vietnamese fried spring rolls, three per serving",
     "goi-cuon-tom": "Prawn rice paper rolls with fresh herbs",
-    "bun-xa-xiu-kho": "Dry rice vermicelli with crispy pork neck",
+    "bun-xa-xiu-kho": "Rice vermicelli salad with Vietnamese grilled meatballs",
     "bun-cha-gio-lon": "Large spring roll with rice vermicelli and peanuts",
     "bun-cha-gio": "Dry rice vermicelli with crispy spring rolls, bean sprouts and coriander"
   };

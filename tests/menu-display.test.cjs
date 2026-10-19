@@ -69,7 +69,11 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     assert.deepEqual(names(nodes.menuGrid.innerHTML), ['越式扎肉拼盤', '越式炸春卷（三件）', '大蝦紙米卷']);
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), ['B01', 'B02', 'B03']);
     select('米線');
-    assert.deepEqual(names(nodes.menuGrid.innerHTML), ['香脆豬頸肉乾撈米線', '脆皮春卷乾撈米線']);
+    assert.deepEqual(names(nodes.menuGrid.innerHTML), ['越式烤肉丸撈檬', '脆皮春卷乾撈米線']);
+    assert.ok(!nodes.menuGrid.innerHTML.includes('香脆豬頸肉'));
+    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-grilled-meatball-20261019.png'));
+    assert.ok(nodes.menuGrid.innerHTML.includes('Rice vermicelli salad with Vietnamese grilled meatballs'));
+    assert.ok(source.includes("vietnameseName: 'Trộn thịt viên nướng'"));
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), ['C01', 'C02']);
     select('飲品');
     assert.deepEqual(names(nodes.menuGrid.innerHTML), approvedDrinkPrices.map(item => item[0]));
