@@ -51,7 +51,7 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     const all = names(nodes.menuGrid.innerHTML);
     const allCodes = codes(nodes.menuGrid.innerHTML);
     assert.deepEqual(all.slice(0, 7), expectedFirstSeven);
-    assert.equal(all.length, 31);
+    assert.equal(all.length, 33);
     assert.equal(new Set(all).size, all.length);
     assert.equal(new Set(allCodes).size, allCodes.length);
     assert.deepEqual(allCodes.slice(0, 7), ['A01', 'A02', 'A03', 'A04', 'A05', 'A06', 'A07']);
@@ -66,15 +66,26 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     assert.equal(names(nodes.menuGrid.innerHTML).length, 17);
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), Array.from({ length: 17 }, (_, i) => 'A' + String(i + 1).padStart(2, '0')));
     select('小食');
-    assert.deepEqual(names(nodes.menuGrid.innerHTML), ['越式扎肉拼盤', '越式炸春卷（三件）', '大蝦紙米卷']);
+    assert.deepEqual(names(nodes.menuGrid.innerHTML), ['越式扎肉拼盤', '越式炸春卷（兩件）', '大蝦紙米卷']);
+    const springRoll = cards(nodes.menuGrid.innerHTML).find(card => card.includes('data-code="B02"'));
+    assert.ok(springRoll.includes('HK$48'));
+    assert.ok(springRoll.includes('HK$34'));
+    assert.ok(springRoll.includes('images/spring-roll-two-20261019.png'));
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), ['B01', 'B02', 'B03']);
     select('米線');
-    assert.deepEqual(names(nodes.menuGrid.innerHTML), ['越式烤肉丸撈檬', '脆皮春卷乾撈米線']);
+    assert.deepEqual(names(nodes.menuGrid.innerHTML), ['越式烤肉丸撈檬', '越式春卷撈檬', '越式蒟葉牛肉卷撈檬', '越式魚餅撈檬']);
+    for (const card of cards(nodes.menuGrid.innerHTML)) {
+      assert.equal(Number(card.match(/class="platform-price">.*?<strong>HK\$(\d+)/s)[1]), 60);
+      assert.equal(Number(card.match(/class="pickup-price">.*?<strong>HK\$(\d+)/s)[1]), 42);
+    }
+    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-la-lot-20261019.png'));
+    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-fish-cake-20261019.jpg'));
+    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-spring-roll-20261019.jpg'));
     assert.ok(!nodes.menuGrid.innerHTML.includes('香脆豬頸肉'));
     assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-grilled-meatball-20261019.png'));
     assert.ok(nodes.menuGrid.innerHTML.includes('Rice vermicelli salad with Vietnamese grilled meatballs'));
     assert.ok(source.includes("vietnameseName: 'Trộn thịt viên nướng'"));
-    assert.deepEqual(codes(nodes.menuGrid.innerHTML), ['C01', 'C02']);
+    assert.deepEqual(codes(nodes.menuGrid.innerHTML), ['C01', 'C02', 'C04', 'C05']);
     select('飲品');
     assert.deepEqual(names(nodes.menuGrid.innerHTML), approvedDrinkPrices.map(item => item[0]));
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), Array.from({ length: 9 }, (_, i) => 'D' + String(i + 1).padStart(2, '0')));
@@ -108,7 +119,7 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     for (const removed of ['lang="vi"', 'menu-localization', 'menu-card-name-translation', 'Platform reference', 'Giá trên ứng dụng', 'Gọi món']) {
       assert.ok(!html.includes(removed));
     }
-    assert.equal((html.match(/class="menu-card-desc" lang="en"/g) || []).length, 27);
+    assert.equal((html.match(/class="menu-card-desc" lang="en"/g) || []).length, 29);
     const first = cards(html)[0];
     assert.ok(first.includes('Betel-leaf beef rolls and Vietnamese pork sausage'));
     assert.ok(!first.includes('荖葉牛肉卷、扎肉配法包'));
@@ -123,7 +134,7 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
       assert.ok(card.includes('<p class="menu-card-desc">' + description + '</p>'));
       assert.ok(!card.includes('class="menu-card-desc" lang="en"'));
     }
-    assert.equal((html.match(/Phone pickup/g) || []).length, 31);
+    assert.equal((html.match(/Phone pickup/g) || []).length, 33);
     assert.ok(!html.includes('扎肉、豬肉、醃菜及青瓜絲'));
     for (const privateTerm of ['成本', '利潤', '入貨', '套餐加配']) assert.ok(!html.includes(privateTerm));
     const pandan = cards(html).find(item => item.includes('法包屋・斑蘭牛油肉鬆'));
