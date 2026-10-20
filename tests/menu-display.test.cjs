@@ -86,7 +86,7 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
     assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-fish-cake-20261019.jpg'));
     assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-spring-roll-20261019.jpg'));
     assert.ok(!nodes.menuGrid.innerHTML.includes('香脆豬頸肉'));
-    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-grilled-meatball-20261019.png'));
+    assert.ok(nodes.menuGrid.innerHTML.includes('images/menu-c01-natural-20261020.jpg'));
     assert.ok(nodes.menuGrid.innerHTML.includes('Rice vermicelli salad with Vietnamese grilled meatballs'));
     assert.ok(source.includes("vietnameseName: 'Trộn thịt viên nướng'"));
     assert.deepEqual(codes(nodes.menuGrid.innerHTML), ['C01', 'C02', 'C03', 'C04', 'C05', 'C06', 'C07']);
