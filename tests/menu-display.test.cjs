@@ -170,7 +170,8 @@ test('discount and phone-first ordering remain, without old translation scripts'
   assert.ok(html.includes('七折後四捨五入至整數港元'));
   assert.ok(!html.includes('網站暫不提供網上落單及付款'));
   assert.ok(html.includes('電話落單・到店自取'));
-  for (const removed of ['js/menu-translations.js', 'lang="vi"', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
+  for (const removed of ['js/menu-translations.js', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
+  assert.equal((html.match(/\slang="vi"/g)||[]).length,1, 'Vietnamese language tag is only used on the new site entry');
 });
 
 test('location is above categories and WhatsApp is secondary with collapsed terms', () => {
@@ -239,4 +240,16 @@ test('header phone link is removed while hero phone remains primary', () => {
   assert.ok(!html.includes('call-top'));
   assert.match(html, /class="call-hero" href="tel:\+85254888239"/);
   assert.ok(!html.includes('class="call-main"'));
+});
+
+test('Chinese homepage has a direct Vietnamese entry without changing ordering channels',()=>{
+  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+  const header=html.match(/<header[\s\S]*?<\/header>/)[0];
+  assert.match(header,/<a class="language-top" href="\/vi\/" lang="vi" hreflang="vi" aria-label="Tiếng Việt">/);
+  assert.ok(header.includes('Tiếng Việt'));
+  assert.ok(header.includes('🇻🇳'));
+  assert.ok(header.includes('id="wholesaleLink"'));
+  assert.ok(header.includes('href="#whatsapp-inquiry"'));
+  assert.ok(!header.includes('tel:'));
+  assert.ok(fs.existsSync(path.join(root,'vi/index.html')));
 });
