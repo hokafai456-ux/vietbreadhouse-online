@@ -21,7 +21,8 @@ test('Vietnamese subsite contains all 37 visible items with one numeric price',(
  const html=fs.readFileSync(path.join(root,'vi/index.html'),'utf8');
  const js=fs.readFileSync(path.join(root,'vi/js/menu.js'),'utf8');
  assert.match(html,/<html lang="vi">/);
- assert.ok(!/[\u3400-\u9fff]/u.test(html+js));
+ assert.ok(!/[\u3400-\u9fff]/u.test(html.replace(/<a class="language-top"[\s\S]*?<\/a>/,'')+js));
+ assert.match(html,/<a class="language-top" href="\/" lang="zh-Hant" hreflang="zh-Hant" aria-label="中文">/);
  for(const term of ['Phone pickup','Platform reference','70%','30%','platform-price','pickup-price'])assert.ok(!(html+js).includes(term));
  assert.ok(html.includes('menu-a4.pdf'));
  assert.ok(html.includes('tel:+85254888239'));
