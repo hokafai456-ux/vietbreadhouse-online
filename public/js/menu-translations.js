@@ -15,10 +15,10 @@ globalThis.VBH_MENU_TRANSLATIONS = Object.freeze({
     "enDesc": "Betel-leaf beef rolls and Vietnamese pork sausage."
   },
   "banh-mi-la-lot": {
-    "vi": "Bánh mì thịt cuốn lá lốt",
-    "en": "Vietnamese Betel-Leaf Meat Roll Baguette",
-    "viDesc": "Thịt cuốn lá lốt kẹp bánh mì.",
-    "enDesc": "Vietnamese betel-leaf meat rolls in a baguette."
+    "vi": "Bánh mì bò cuốn lá lốt",
+    "en": "Vietnamese Betel-Leaf Beef Roll Baguette",
+    "viDesc": "Bò cuốn lá lốt kẹp bánh mì.",
+    "enDesc": "Vietnamese betel-leaf beef rolls in a baguette."
   },
   "banh-mi-cha-ca": {
     "vi": "Bánh mì chả cá",
@@ -27,10 +27,10 @@ globalThis.VBH_MENU_TRANSLATIONS = Object.freeze({
     "enDesc": "Vietnamese fish cake in a baguette."
   },
   "banh-mi-cha-thit-nuong": {
-    "vi": "Bánh mì chả thịt nướng",
-    "en": "Pork Sausage & Grilled Pork Baguette",
-    "viDesc": "Chả và thịt nướng.",
-    "enDesc": "Vietnamese pork sausage and grilled pork."
+    "vi": "Bánh mì chả thịt viên nướng",
+    "en": "Vietnamese Pork Sausage & Grilled Meatball Baguette",
+    "viDesc": "Chả và thịt viên nướng.",
+    "enDesc": "Vietnamese pork sausage and grilled meatballs."
   },
   "banh-mi-bo-bit-tet": {
     "vi": "Bánh mì bò bít tết",
@@ -41,12 +41,12 @@ globalThis.VBH_MENU_TRANSLATIONS = Object.freeze({
   "banh-mi-thit-nuong-jambon": {
     "vi": "Bánh mì thịt nướng jambon",
     "en": "Signature Vietnamese Triple-Meat Baguette",
-    "viDesc": "Thịt nướng, thịt nguội và chả.",
-    "enDesc": "Roast pork, jellied pork terrine and Vietnamese pork sausage."
+    "viDesc": "Thịt viên nướng, giò thủ và chả.",
+    "enDesc": "Grilled meatballs, jellied pork terrine and Vietnamese pork sausage."
   },
   "banh-mi-gio-cha-jambon": {
-    "vi": "Bánh mì thập cẩm giò chả jambon",
-    "en": "Vietnamese Traditional Mixed-Meat Baguette",
+    "vi": "Bánh mì tam tấu giò chả",
+    "en": "Vietnamese Pork Sausage Trio Baguette",
     "viDesc": "Thịt nguội, hai loại giò chả và chà bông heo.",
     "enDesc": "Jellied pork terrine, two pork sausages and pork floss."
   },
@@ -93,16 +93,16 @@ globalThis.VBH_MENU_TRANSLATIONS = Object.freeze({
     "enDesc": "Vietnamese pork sausage, pork, pickles and shredded cucumber."
   },
   "banh-mi-xiu-mai": {
-    "vi": "Bánh mì xíu mại xá xíu",
-    "en": "Pork Meatball & Char Siu Baguette",
-    "viDesc": "Xíu mại, xá xíu và đồ chua.",
-    "enDesc": "Handmade pork meatballs, char siu and Vietnamese pickles."
+    "vi": "Bánh mì xíu mại sốt cà chua xá xíu",
+    "en": "Tomato-Sauce Meatball & Char Siu Baguette",
+    "viDesc": "Xíu mại sốt cà chua, xá xíu và đồ chua.",
+    "enDesc": "Tomato-sauce meatballs, char siu and Vietnamese pickles."
   },
   "banh-mi-xa-xiu": {
-    "vi": "Bánh mì xá xíu",
-    "en": "Char Siu Baguette",
-    "viDesc": "Xá xíu, đồ chua và ngò rí.",
-    "enDesc": "Char siu with Vietnamese pickles and coriander."
+    "vi": "Bánh mì giò thủ xá xíu",
+    "en": "Jellied Pork Terrine & Char Siu Baguette",
+    "viDesc": "Giò thủ, xá xíu, đồ chua và ngò rí.",
+    "enDesc": "Jellied pork terrine and char siu with Vietnamese pickles and coriander."
   },
   "cha-lua-plat": {
     "vi": "Giò chả thập cẩm",

@@ -21,5 +21,5 @@
   }
   tabs.addEventListener('click',event=>{const button=event.target.closest('button[data-category]');if(button){active=button.dataset.category;render();tabs.querySelector('[data-category="'+CSS.escape(active)+'"]')?.focus({preventScroll:true});}});
   document.getElementById('wholesaleLink').addEventListener('click',()=>{document.getElementById('wholesale').open=true;});
-  fetch('menu.json').then(r=>{if(!r.ok)throw new Error('Menu unavailable');return r.json();}).then(data=>{menu=data;render();}).catch(()=>{grid.innerHTML='<p class="load-state" role="alert">Chưa tải được thực đơn. Vui lòng thử lại hoặc gọi 5488 8239.</p>';});
+  fetch('menu.json?v=20261025').then(r=>{if(!r.ok)throw new Error('Menu unavailable');return r.json();}).then(data=>{menu=data;render();}).catch(()=>{grid.innerHTML='<p class="load-state" role="alert">Chưa tải được thực đơn. Vui lòng thử lại hoặc gọi 5488 8239.</p>';});
 })();

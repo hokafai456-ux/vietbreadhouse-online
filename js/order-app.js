@@ -2,26 +2,21 @@
   'use strict';
 
   const seedMenu = [
-    { id: 'banh-mi-bo-sot-vang', name: '越式香好紅酒牛腩配法包', vietnameseName: 'Bánh mì bò sốt vang', category: '法包', price: 96, image: 'images/banh-mi-bo-sot-vang-20261016.jpg', desc: '越式香好紅酒牛腩配法包' },
     { id: 'banh-mi-bo-la-lot-cha', name: '招牌荖葉牛肉卷扎肉法包', category: '法包', price: 78, image: 'images/banh-mi-bo-la-lot-cha-20261016.jpg', desc: '荖葉牛肉卷、扎肉配法包' },
-    { id: 'banh-mi-la-lot', name: '越式荖葉肉卷法包', category: '法包', price: 72, image: 'images/banh-mi-la-lot-20261016.png', desc: '越式荖葉肉卷配法包' },
+    { id: 'banh-mi-la-lot', name: '越式荖葉牛肉卷法包', category: '法包', price: 72, image: 'images/banh-mi-la-lot-20261016.png', desc: '越式荖葉牛肉卷配法包' },
     { id: 'banh-mi-cha-ca', name: '越式魚餅法包', category: '法包', price: 68, image: 'images/menu-new-01-20261016.jpg', desc: '越式魚餅配法包' },
-    { id: 'banh-mi-cha-thit-nuong', name: '扎肉烤肉雙拼法包', category: '法包', price: 72, image: 'images/menu-new-02-20261016.png', desc: '扎肉、烤肉雙拼' },
-    { id: 'banh-mi-bo-bit-tet', name: '越式牛扒配法包', category: '法包', price: 89, image: 'images/menu-new-03-20261016.png', desc: '越式牛扒配法包' },
-    { id: 'banh-mi-thit-nuong-jambon', name: '招牌越式三寶法包', category: '法包', price: 78, image: 'images/menu-new-04-20261016.png', desc: '燒肉、水晶蹄、越式扎肉' },
-    { id: 'banh-mi-gio-cha-jambon', name: '越式傳統法包', category: '法包', price: 78, image: 'images/menu-new-05-20261016.png', desc: '水晶蹄、雙拼扎肉、豬肉鬆' },
+    { id: 'banh-mi-cha-thit-nuong', name: '扎肉烤肉丸雙拼法包', category: '法包', price: 72, image: 'images/menu-new-02-20261016.png', desc: '扎肉、燒烤肉丸雙拼' },
+    { id: 'banh-mi-thit-nuong-jambon', name: '招牌越式三寶法包', category: '法包', price: 78, image: 'images/menu-new-04-20261016.png', desc: '燒烤肉丸、水晶蹄、越式扎肉' },
+    { id: 'banh-mi-gio-cha-jambon', name: '越式扎肉三重奏法包', category: '法包', price: 78, image: 'images/menu-new-05-20261016.png', desc: '水晶蹄、雙拼扎肉、豬肉鬆' },
     { id: 'banh-mi-gio-cha-ruoc', name: '雙款扎肉肉鬆越南法包', category: '法包', price: 76, image: 'images/menu-new-07-20261016.png', desc: '雙款扎肉、豬肉鬆' },
-    { id: 'banh-mi-nuong-muoi-ot', name: '法包屋香辣烤法包', category: '法包', price: 78, image: 'images/menu-new-08-20261016.png', desc: '香辣烤法包' },
     { id: 'banh-mi-bate-gio-thit-nuong', name: '巴地燒肉扎肉越南法包', category: '法包', price: 78, image: 'images/menu-new-09-20261016.png', desc: '巴地、燒肉、扎肉' },
-    { id: 'banh-mi-trung-op-la', name: '越式雜錦太陽蛋配法包', category: '法包', price: 78, image: 'images/menu-new-10-20261016.png', desc: '巴地、香腸、扎肉、太陽蛋及法包' },
-    { id: 'banh-mi-bo-la-dua-cha-bong', name: '法包屋・斑蘭牛油肉鬆', category: '法包', price: 62, image: 'images/menu-new-11-20261016.png', desc: '斑蘭牛油、肉鬆配法包' },
+    { id: 'banh-mi-bo-la-dua-cha-bong', name: '法包屋・斑蘭牛油肉鬆法包', category: '法包', price: 62, image: 'images/menu-new-11-20261016.png', desc: '斑蘭牛油、肉鬆配法包' },
     { id: 'banh-mi-dac-biet', name: '招牌法包', category: '法包', price: 78, image: 'images/banh-mi-dac-biet.jpg', desc: '越式扎肉、肝醬、醃菜及芫荽' },
     { id: 'banh-mi-thap-cam', name: '傳統法包', category: '法包', price: 68, image: 'images/banh-mi-thap-cam.jpg', desc: '扎肉、豬肉' },
-    { id: 'banh-mi-xiu-mai', name: '肉丸叉燒法包', category: '法包', price: 68, image: 'images/banh-mi-xiu-mai.jpg', desc: '手打肉丸、叉燒及越式醃菜' },
-    { id: 'banh-mi-xa-xiu', name: '叉燒法包', category: '法包', price: 68, image: 'images/menu-a02-natural-20261020.jpg', desc: '香烤叉燒配越式醃菜及芫荽' },
+    { id: 'banh-mi-xiu-mai', name: '蕃茄肉丸叉燒法包', category: '法包', price: 68, image: 'images/banh-mi-xiu-mai.jpg', desc: '蕃茄肉丸、叉燒及越式醃菜' },
+    { id: 'banh-mi-xa-xiu', name: '水晶蹄叉燒法包', category: '法包', price: 68, image: 'images/menu-a02-natural-20261020.jpg', desc: '水晶蹄、叉燒配越式醃菜及芫荽' },
     { id: 'cha-lua-plat', name: '越式扎肉拼盤', category: '小食', price: 68, image: 'images/cha-lua-platter-20261016-edited.png', desc: '越式扎肉切片拼盤' },
     { id: 'cha-gio', name: '越式炸春卷（兩件）', category: '小食', price: 48, image: 'images/spring-roll-two-20261019.png', desc: '香脆越式炸春卷，每份兩件' },
-    { id: 'goi-cuon-tom', name: '大蝦紙米卷', category: '小食', price: 78, image: 'images/goi-cuon-tom.jpg', desc: '新鮮大蝦紙米卷配香草' },
     { id: 'shrimp-cake', name: '蝦餅（三件）', category: '小食', price: 47, image: 'images/shrimp-cake-three-20261019.jpg', desc: '香脆蝦餅，每份三件' },
     { id: 'bun-xa-xiu-kho', name: '越式烤肉丸撈檬', vietnameseName: 'Trộn thịt viên nướng', category: '米線', price: 60, image: 'images/menu-c01-natural-20261020.jpg', desc: '越式烤肉丸拌米線' },
     { id: 'bun-cha-gio-lon', name: '大春卷乾撈米線', category: '米線', price: 60, image: 'images/bun-cha-gio-lon.jpg', desc: '大春卷配米線及花生', hidden: true },
@@ -44,29 +39,24 @@
 
   const $ = id => document.getElementById(id);
   let activeCategory = '全部';
-  // Keep codes stable across category filters and temporary hiding.
+  // Consecutive public codes after the owner's 2026-10-25 removals.
   const itemCodes = {
     "banh-mi-bo-la-lot-cha": "A01",
     "banh-mi-xa-xiu": "A02",
     "banh-mi-xiu-mai": "A03",
     "banh-mi-bo-la-dua-cha-bong": "A04",
     "banh-mi-dac-biet": "A05",
-    "banh-mi-nuong-muoi-ot": "A06",
-    "banh-mi-bo-sot-vang": "A07",
-    "banh-mi-la-lot": "A08",
-    "banh-mi-cha-ca": "A09",
-    "banh-mi-cha-thit-nuong": "A10",
-    "banh-mi-bo-bit-tet": "A11",
-    "banh-mi-thit-nuong-jambon": "A12",
-    "banh-mi-gio-cha-jambon": "A13",
-    "banh-mi-gio-cha-ruoc": "A14",
-    "banh-mi-bate-gio-thit-nuong": "A15",
-    "banh-mi-trung-op-la": "A16",
-    "banh-mi-thap-cam": "A17",
+    "banh-mi-la-lot": "A06",
+    "banh-mi-cha-ca": "A07",
+    "banh-mi-cha-thit-nuong": "A08",
+    "banh-mi-thit-nuong-jambon": "A09",
+    "banh-mi-gio-cha-jambon": "A10",
+    "banh-mi-gio-cha-ruoc": "A11",
+    "banh-mi-bate-gio-thit-nuong": "A12",
+    "banh-mi-thap-cam": "A13",
     "cha-lua-plat": "B01",
     "cha-gio": "B02",
-    "goi-cuon-tom": "B03",
-    "shrimp-cake": "B04",
+    "shrimp-cake": "B03",
     "bun-xa-xiu-kho": "C01",
     "bun-cha-gio": "C02",
     "bun-cha-gio-lon": "C08",
@@ -88,11 +78,11 @@
   const englishDescriptions = {
     "banh-mi-bo-sot-vang": "Red wine beef brisket served with a baguette",
     "banh-mi-bo-la-lot-cha": "Betel-leaf beef rolls and Vietnamese pork sausage",
-    "banh-mi-la-lot": "Vietnamese betel-leaf meat rolls in a baguette",
+    "banh-mi-la-lot": "Vietnamese betel-leaf beef rolls in a baguette",
     "banh-mi-cha-ca": "Vietnamese fish cake in a baguette",
-    "banh-mi-cha-thit-nuong": "Vietnamese pork sausage and grilled pork",
+    "banh-mi-cha-thit-nuong": "Vietnamese pork sausage and grilled meatballs",
     "banh-mi-bo-bit-tet": "Vietnamese-style steak served with a baguette",
-    "banh-mi-thit-nuong-jambon": "Roast pork, jellied pork terrine and Vietnamese pork sausage",
+    "banh-mi-thit-nuong-jambon": "Grilled meatballs, jellied pork terrine and Vietnamese pork sausage",
     "banh-mi-gio-cha-jambon": "Jellied pork terrine, two pork sausages and pork floss",
     "banh-mi-gio-cha-ruoc": "Two Vietnamese pork sausages and pork floss",
     "banh-mi-nuong-muoi-ot": "Spicy grilled baguette",
@@ -101,8 +91,8 @@
     "banh-mi-bo-la-dua-cha-bong": "Pandan butter and pork floss in a baguette",
     "banh-mi-dac-biet": "Vietnamese pork sausage, pâté, pickles and coriander",
     "banh-mi-thap-cam": "Vietnamese pork sausage, pork, pickles and shredded cucumber",
-    "banh-mi-xiu-mai": "Handmade pork meatballs, char siu and Vietnamese pickles",
-    "banh-mi-xa-xiu": "Char siu with Vietnamese pickles and coriander",
+    "banh-mi-xiu-mai": "Tomato-sauce meatballs, char siu and Vietnamese pickles",
+    "banh-mi-xa-xiu": "Jellied pork terrine and char siu with Vietnamese pickles and coriander",
     "cha-lua-plat": "A platter of sliced Vietnamese pork sausages",
     "cha-gio": "Crispy Vietnamese fried spring rolls, two per serving",
     "goi-cuon-tom": "Prawn rice paper rolls with fresh herbs",
@@ -129,23 +119,9 @@
     })[character]);
   }
 
-  // Keep temporarily hidden dishes in seedMenu so they can be restored later.
-  const featuredOrder = [
-    'banh-mi-bo-la-lot-cha',
-    'banh-mi-xa-xiu',
-    'banh-mi-xiu-mai',
-    'banh-mi-bo-la-dua-cha-bong',
-    'banh-mi-dac-biet',
-    'banh-mi-nuong-muoi-ot',
-    'banh-mi-bo-sot-vang',
-  ];
-  const rank = id => {
-    const index = featuredOrder.indexOf(id);
-    return index === -1 ? featuredOrder.length : index;
-  };
-  // Use the published menu, not stale browser-saved data. Unlisted dishes keep their relative order.
+  // Product IDs stay unchanged; only public menu codes are compacted.
   const menu = seedMenu.filter(item => !item.hidden)
-    .sort((a, b) => rank(a.id) - rank(b.id))
+    .sort((a, b) => itemCodes[a.id].localeCompare(itemCodes[b.id]))
     .map(item => ({ ...item, code: itemCodes[item.id] }));
 
   function money(value) {

@@ -7,9 +7,9 @@ const root=path.resolve(__dirname,'..');
 const menu=JSON.parse(fs.readFileSync(path.join(root,'vi/menu.json'),'utf8'));
 const source=fs.readFileSync(path.join(root,'js/order-app.js'),'utf8');
 const original=vm.runInNewContext(source.match(/const seedMenu = (\[[\s\S]*?\n  \]);/)[1]);
-test('Vietnamese subsite contains all 37 visible items with one numeric price',()=>{
- assert.equal(menu.length,37);
- assert.deepEqual(menu.map(x=>x.code),['A','B','C','D'].flatMap((c,i)=>Array.from({length:[17,4,7,9][i]},(_,j)=>c+String(j+1).padStart(2,'0'))));
+test('Vietnamese subsite contains all 32 visible items with consecutive codes and one numeric price',()=>{
+ assert.equal(menu.length,32);
+ assert.deepEqual(menu.map(x=>x.code),['A','B','C','D'].flatMap((c,i)=>Array.from({length:[13,3,7,9][i]},(_,j)=>c+String(j+1).padStart(2,'0'))));
  for(const item of menu){
   const match=original.find(x=>x.id===item.id);
   assert.ok(match&&!match.hidden);
@@ -26,7 +26,7 @@ test('Vietnamese subsite contains all 37 visible items with one numeric price',(
  for(const term of ['Phone pickup','Platform reference','70%','30%','platform-price','pickup-price'])assert.ok(!(html+js).includes(term));
  assert.ok(html.includes('menu-a4.pdf'));
  assert.ok(html.includes('tel:+85254888239'));
- assert.ok(js.includes("fetch('menu.json')"));
+ assert.ok(js.includes("fetch('menu.json?v=20261025')"));
  assert.equal(fs.readFileSync(path.join(root,'CNAME'),'utf8').trim(),'vietbreadhouse.hk');
 });
 test('Vietnamese deployment mirrors every static file and includes printable A4 PDF',()=>{
