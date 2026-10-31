@@ -11,6 +11,7 @@
     { id: 'banh-mi-gio-cha-ruoc', name: '雙款扎肉肉鬆越南法包', category: '法包', price: 76, image: 'images/menu-new-07-20261016.png', desc: '雙款扎肉、豬肉鬆' },
     { id: 'banh-mi-bate-gio-thit-nuong', name: '巴地燒肉扎肉越南法包', category: '法包', price: 78, image: 'images/menu-new-09-20261016.png', desc: '巴地、燒肉、扎肉' },
     { id: 'banh-mi-bo-la-dua-cha-bong', name: '法包屋・斑蘭牛油肉鬆法包', category: '法包', price: 62, image: 'images/menu-new-11-20261016.png', desc: '斑蘭牛油、肉鬆配法包' },
+    // A05: the owner shortens "tomato-sauce grilled meatballs" to 番茄肉丸 in the name; desc 燒烤肉丸 is intentional.
     { id: 'banh-mi-dac-biet', name: '水晶蹄番茄肉丸扎肉法包', category: '法包', price: 78, image: 'images/banh-mi-dac-biet.jpg', desc: '水晶蹄、燒烤肉丸、越式扎肉' },
     { id: 'banh-mi-thap-cam', name: '傳統法包', category: '法包', price: 68, image: 'images/banh-mi-thap-cam.jpg', desc: '扎肉、豬肉' },
     { id: 'banh-mi-xiu-mai', name: '蕃茄肉丸叉燒法包', category: '法包', price: 68, image: 'images/banh-mi-xiu-mai.jpg', desc: '蕃茄肉丸、叉燒及越式醃菜' },
@@ -37,8 +38,12 @@
     { id: 'drink-pear-coconut', name: '鴻福堂雪梨海底椰', englishName: 'Hung Fook Tong Pear & Sea Coconut Drink', category: '飲品', price: 18, image: 'images/drink-pear-coconut-20261018.jpg' },
   ];
 
+  const ALL_CATEGORIES = '全部';
+  const DRINK_CATEGORY = '飲品';
+  const PICKUP_DISCOUNT = 0.7;
+
   const $ = id => document.getElementById(id);
-  let activeCategory = '全部';
+  let activeCategory = ALL_CATEGORIES;
   // Consecutive public codes after the owner's 2026-10-25 removals.
   const itemCodes = {
     "banh-mi-bo-la-lot-cha": "A01",
@@ -76,18 +81,14 @@
     "drink-pear-coconut": "D09"
   };
   const englishDescriptions = {
-    "banh-mi-bo-sot-vang": "Red wine beef brisket served with a baguette",
     "banh-mi-bo-la-lot-cha": "Betel-leaf beef rolls and Vietnamese pork sausage",
     "banh-mi-la-lot": "Vietnamese betel-leaf beef rolls in a baguette",
     "banh-mi-cha-ca": "Vietnamese fish cake in a baguette",
     "banh-mi-cha-thit-nuong": "Vietnamese pork sausage and grilled meatballs",
-    "banh-mi-bo-bit-tet": "Vietnamese-style steak served with a baguette",
     "banh-mi-thit-nuong-jambon": "Grilled meatballs, jellied pork terrine and Vietnamese pork sausage",
     "banh-mi-gio-cha-jambon": "Jellied pork terrine, two pork sausages and pork floss",
     "banh-mi-gio-cha-ruoc": "Two Vietnamese pork sausages and pork floss",
-    "banh-mi-nuong-muoi-ot": "Spicy grilled baguette",
     "banh-mi-bate-gio-thit-nuong": "Pâté, roast pork and Vietnamese pork sausage",
-    "banh-mi-trung-op-la": "Pâté, sausage, Vietnamese pork sausage, sunny-side-up eggs and a baguette",
     "banh-mi-bo-la-dua-cha-bong": "Pandan butter and pork floss in a baguette",
     "banh-mi-dac-biet": "Jellied pork terrine, grilled meatballs and Vietnamese pork sausage",
     "banh-mi-thap-cam": "Vietnamese pork sausage, pork, pickles and shredded cucumber",
@@ -95,7 +96,6 @@
     "banh-mi-xa-xiu": "Jellied pork terrine and char siu with Vietnamese pickles and coriander",
     "cha-lua-plat": "A platter of sliced Vietnamese pork sausages",
     "cha-gio": "Crispy Vietnamese fried spring rolls, two per serving",
-    "goi-cuon-tom": "Prawn rice paper rolls with fresh herbs",
     "shrimp-cake": "Crispy shrimp cakes, three per serving",
     "bun-xa-xiu-kho": "Rice vermicelli salad with Vietnamese grilled meatballs",
     "bun-cha-gio-lon": "Large spring roll with rice vermicelli and peanuts",
@@ -109,7 +109,6 @@
   const keepChineseIngredients = new Set([
     'banh-mi-thit-nuong-jambon',
     'banh-mi-gio-cha-jambon',
-    'banh-mi-trung-op-la',
     'banh-mi-thap-cam',
   ]);
 
@@ -124,56 +123,65 @@
     .sort((a, b) => itemCodes[a.id].localeCompare(itemCodes[b.id]))
     .map(item => ({ ...item, code: itemCodes[item.id] }));
 
-  function money(value) {
-    const rounded = Math.round(value * 100) / 100;
-    return `HK$${Number.isInteger(rounded) ? rounded : rounded.toFixed(2).replace(/0$/, '').replace(/\.$/, '')}`;
+  // All prices are whole Hong Kong dollars.
+  const money = value => `HK$${value}`;
+
+  // Most cards show an English description; a few keep the Chinese ingredient list.
+  function describe(item) {
+    if (keepChineseIngredients.has(item.id)) return { text: item.desc, lang: '' };
+    return { text: item.englishName || englishDescriptions[item.id], lang: ' lang="en"' };
   }
 
   function renderTabs() {
-    const cats = ['全部', ...new Set(menu.map(item => item.category))];
-    $('catTabs').innerHTML = cats.map(category =>
-      `<button class="cat-tab${category === activeCategory ? ' active' : ''}" type="button" data-category="${category}">${category}</button>`
-    ).join('');
-
-    $('catTabs').onclick = event => {
-      const button = event.target.closest('.cat-tab');
-      if (!button) return;
-      activeCategory = button.dataset.category;
-      renderTabs();
-      renderMenu();
-    };
+    const categories = [ALL_CATEGORIES, ...new Set(menu.map(item => item.category))];
+    $('catTabs').innerHTML = categories.map(category => {
+      const active = category === activeCategory ? ' active' : '';
+      const label = escapeHtml(category);
+      return `<button class="cat-tab${active}" type="button" data-category="${label}">${label}</button>`;
+    }).join('');
   }
 
-  function renderMenu() {
-    const visibleItems = activeCategory === '全部'
-      ? menu
-      : menu.filter(item => item.category === activeCategory);
-
-    $('menuGrid').innerHTML = visibleItems.map(item => {
-      const pickupPrice = Math.round(item.price * 0.7);
-      const isChineseDescription = keepChineseIngredients.has(item.id);
-      const description = isChineseDescription ? item.desc : (item.englishName || englishDescriptions[item.id]);
-      const descriptionHtml = description
-        ? `<p class="menu-card-desc"${isChineseDescription ? '' : ' lang="en"'}>${escapeHtml(description)}</p>`
-        : '';
-      const imageHtml = item.image
-        ? `<img class="menu-card-img" src="${item.image}" alt="${item.name}" loading="lazy">`
-        : '';
-      return `
-        <article class="menu-card${item.category === '飲品' ? ' menu-card-drink' : ''}" data-code="${item.code}">
+  function renderCard(item) {
+    const isDrink = item.category === DRINK_CATEGORY;
+    const name = escapeHtml(item.name);
+    const code = escapeHtml(item.code);
+    const pickupPrice = Math.round(item.price * PICKUP_DISCOUNT);
+    const description = describe(item);
+    const descriptionHtml = description.text
+      ? `<p class="menu-card-desc"${description.lang}>${escapeHtml(description.text)}</p>`
+      : '';
+    const imageHtml = item.image
+      ? `<img class="menu-card-img" src="${escapeHtml(item.image)}" alt="${name}" loading="lazy">`
+      : '';
+    return `
+        <article class="menu-card${isDrink ? ' menu-card-drink' : ''}" data-code="${code}">
           ${imageHtml}
           <div class="menu-card-body">
-            <span class="menu-card-cat"><span class="menu-card-code">${item.code}</span>${item.category === '飲品' ? item.category : ''}</span>
-            <strong class="menu-card-name">${item.name}</strong>
+            <span class="menu-card-cat"><span class="menu-card-code">${code}</span>${isDrink ? DRINK_CATEGORY : ''}</span>
+            <strong class="menu-card-name">${name}</strong>
             ${descriptionHtml}
-            <div class="price-stack" aria-label="${item.name} 價格">
+            <div class="price-stack" aria-label="${name} 價格">
               <p class="platform-price"><span>外賣平台參考價</span><strong>${money(item.price)}</strong></p>
               <p class="pickup-price"><span>電話落單 <em>自取價</em><small lang="en">Phone pickup</small></span><strong>${money(pickupPrice)}</strong></p>
             </div>
           </div>
         </article>`;
-    }).join('');
   }
+
+  function renderMenu() {
+    const visibleItems = activeCategory === ALL_CATEGORIES
+      ? menu
+      : menu.filter(item => item.category === activeCategory);
+    $('menuGrid').innerHTML = visibleItems.map(renderCard).join('');
+  }
+
+  $('catTabs').onclick = event => {
+    const button = event.target.closest('.cat-tab');
+    if (!button) return;
+    activeCategory = button.dataset.category;
+    renderTabs();
+    renderMenu();
+  };
 
   const wholesaleLink = $('wholesaleLink');
   if (wholesaleLink) {
