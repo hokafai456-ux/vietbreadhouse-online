@@ -67,3 +67,33 @@ test('Vietnamese page still shows one paid price only and mentions no discount t
   assert.ok(!/30%|giảm|七折/i.test(html));
   for (const [code, [, pickup]] of Object.entries(keeta)) assert.equal(menu.find(item => item.code === code).price, pickup, code);
 });
+
+test('share preview image: each og tag once, image deployed in both copies and matches its declared size and prices', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  assert.equal(html, fs.readFileSync(path.join(root, 'public/index.html'), 'utf8'));
+  const tags = [...html.matchAll(/<meta property="(og:[^"]+)" content="([^"]*)">/g)].map(match => [match[1], match[2]]);
+  assert.equal(new Set(tags.map(([name]) => name)).size, tags.length, 'no duplicated og tag');
+  const og = Object.fromEntries(tags);
+  const prefix = 'https://vietbreadhouse.hk/';
+  assert.ok(og['og:image'].startsWith(prefix));
+  const relative = og['og:image'].slice(prefix.length);
+  const image = fs.readFileSync(path.join(root, relative));
+  assert.deepEqual(image, fs.readFileSync(path.join(root, 'public', relative)));
+  // Read the JPEG frame header (SOF0/SOF2) for the real pixel size.
+  assert.equal(image.readUInt16BE(0), 0xffd8);
+  let offset = 2, size;
+  while (offset < image.length) {
+    const marker = image.readUInt16BE(offset);
+    if (marker === 0xffc0 || marker === 0xffc2) { size = [image.readUInt16BE(offset + 7), image.readUInt16BE(offset + 5)]; break; }
+    offset += 2 + image.readUInt16BE(offset + 2);
+  }
+  assert.deepEqual(size, [Number(og['og:image:width']), Number(og['og:image:height'])]);
+  assert.deepEqual(size, [1200, 630]);
+  assert.equal(og['og:image:type'], 'image/jpeg');
+  assert.ok(image.length < 1024 * 1024);
+  const a09 = renderAll('js/order-app.js').find(card => card.includes('data-code="A09"'));
+  const pickup = a09.match(/<span class="pickup-amount"><strong>HK\$(\d+)/)[1];
+  const platform = a09.match(/外賣平台售價<\/span><strong>HK\$(\d+)/)[1];
+  assert.ok(og['og:image:alt'].includes(`自取實付 $${pickup}`) && og['og:image:alt'].includes(`外賣平台售價 $${platform}`));
+  assert.ok(og['og:image:alt'].includes('已計七折優惠'));
+});
