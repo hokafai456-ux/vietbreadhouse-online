@@ -160,9 +160,9 @@
             <span class="menu-card-cat"><span class="menu-card-code">${code}</span>${isDrink ? DRINK_CATEGORY : ''}</span>
             <strong class="menu-card-name">${name}</strong>
             ${descriptionHtml}
-            <div class="price-stack" aria-label="${name} 價格">
-              <p class="platform-price"><span>外賣平台參考價</span><strong>${money(item.price)}</strong></p>
-              <p class="pickup-price"><span>電話落單 <em>自取價</em><small lang="en">Phone pickup</small></span><strong>${money(pickupPrice)}</strong></p>
+            <div class="price-stack" aria-label="${name}：自取實付 ${money(pickupPrice)}，已計七折優惠；外賣平台售價 ${money(item.price)}">
+              <p class="pickup-price"><span class="pickup-label">自取實付價<small lang="en">Phone pickup</small></span><span class="pickup-amount"><strong>${money(pickupPrice)}</strong><b class="price-included">已計優惠</b></span></p>
+              <p class="platform-price"><span>外賣平台售價</span><strong>${money(item.price)}</strong></p>
             </div>
           </div>
         </article>`;

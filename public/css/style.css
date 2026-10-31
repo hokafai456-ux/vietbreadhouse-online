@@ -4,6 +4,8 @@
   --brand-light: #a54825;
   --accent: #ef8e2f;
   --green: #23704d;
+  --pickup: #0b4a36;
+  --platform-red: #c0262d;
   --paper: #fffdf8;
   --surface: #ffffff;
   --ink: #261712;
@@ -74,10 +76,12 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 8px 24px rgba(80, 35, 18, .1);
 }
 .offer-badge {
-  flex: 0 0 auto; width: 58px; height: 58px; display: grid; place-items: center;
-  border-radius: 50%; background: var(--brand); color: #fff; font-size: 18px; font-weight: 900;
+  flex: 0 0 auto; width: 62px; height: 62px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--pickup); color: #fff; font-size: 13px; font-weight: 900; line-height: 1.2; text-align: center;
 }
-.offer strong { display: block; color: var(--brand); font-size: 17px; }
+.offer strong { display: block; color: var(--pickup); font-size: 17px; line-height: 1.4; }
+.offer .offer-example { margin-top: 4px; color: #3d3a32; font-size: 14px; line-height: 1.5; }
+.offer-example b { color: var(--pickup); font-size: 16px; white-space: nowrap; }
 .offer p { margin-top: 2px; color: #76553e; font-size: 12px; }
 .offer-details summary { width: fit-content; min-height: 36px; padding-top: 6px; cursor: pointer; color: var(--brand); font-size: 13px; }
 .offer-details p { margin-top: 8px; font-size: 13px; line-height: 1.6; }
@@ -114,17 +118,16 @@ a { color: inherit; text-decoration: none; }
 .menu-card-drink .menu-card-body { padding: 18px 14px; min-height: 176px; background: linear-gradient(145deg, #fff, #fff7ec); }
 .menu-card-drink .menu-card-img { object-fit: contain; padding: 12px; background: #fff; }
 
-/* Card prices: platform price above, phone pickup price below */
+/* Card prices: the paid pickup price first, with 已計優惠 beside the amount; platform price below, small and red */
 .price-stack { margin-top: auto; padding-top: 9px; border-top: 1px solid var(--line); }
-.platform-price, .pickup-price { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-.platform-price > span, .pickup-price > span { min-width: 0; }
-.platform-price strong, .pickup-price strong { flex-shrink: 0; }
-.platform-price small, .pickup-price small { display: block; margin-top: 2px; font-size: 9px; line-height: 1.3; font-weight: 400; }
-.platform-price { color: var(--muted); font-size: 11px; }
-.platform-price strong { color: #4e3a31; font-size: 14px; text-decoration: line-through; text-decoration-thickness: 1px; }
-.pickup-price { margin-top: 4px; color: var(--green); font-size: 11px; font-weight: 900; }
-.pickup-price strong { font-size: 19px; line-height: 1; }
-.pickup-price em { display: block; font-style: normal; font-size: 10px; }
+.pickup-label { display: block; color: var(--pickup); font-size: 12px; font-weight: 900; }
+.pickup-label small { margin-left: 4px; font-size: 9px; font-weight: 400; }
+.pickup-amount { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; margin-top: 3px; }
+.pickup-amount strong { color: var(--pickup); font-size: 21px; line-height: 1.1; white-space: nowrap; }
+.price-included { padding: 2px 6px; border-radius: 999px; background: var(--pickup); color: #fff; font-size: 11px; font-weight: 700; line-height: 1.45; white-space: nowrap; }
+.platform-price { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-top: 6px; color: var(--platform-red); font-size: 11px; }
+.platform-price > span { min-width: 0; }
+.platform-price strong { flex-shrink: 0; color: var(--platform-red); font-size: 13px; font-weight: 700; text-decoration: line-through; text-decoration-thickness: 1px; }
 
 /* WhatsApp contact */
 .contact-card {
@@ -209,7 +212,8 @@ footer { padding: 20px; color: #8a766d; background: #f5eee7; text-align: center;
   .menu-grid { gap: 9px; }
   .menu-card-body { padding: 9px; }
   .menu-card-name { font-size: 14px; }
-  .pickup-price strong { font-size: 17px; }
+  .pickup-amount strong { font-size: 19px; }
+  .offer { gap: 10px; padding: 12px 14px; }
 }
 @media (max-width: 359px) {
   .brand small { font-size: 9px; letter-spacing: .03em; }
