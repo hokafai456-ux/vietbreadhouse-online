@@ -61,11 +61,48 @@ test('homepage: no stand-alone 七折; the visible offer and share text say the 
   for (const name of ['og:title', 'og:type', 'og:site_name']) assert.ok(meta(name));
 });
 
-test('Vietnamese page still shows one paid price only and mentions no discount to stack', () => {
-  const html = fs.readFileSync(path.join(root, 'vi/index.html'), 'utf8');
+test('Vietnamese page: every card labels its unchanged paid price, and the visible note says the discount is included', async () => {
   const menu = JSON.parse(fs.readFileSync(path.join(root, 'vi/menu.json'), 'utf8'));
-  assert.ok(!/30%|giảm|七折/i.test(html));
+  const source = fs.readFileSync(path.join(root, 'js/order-app.js'), 'utf8');
+  const original = vm.runInNewContext(source.match(/const seedMenu = (\[[\s\S]*?\n  \]);/)[1]);
+  const nodes = { menuGrid: { innerHTML: '' }, catTabs: { innerHTML: '', addEventListener() {} }, wholesaleLink: { addEventListener() {} }, wholesale: {} };
+  vm.runInNewContext(fs.readFileSync(path.join(root, 'vi/js/menu.js'), 'utf8'), {
+    document: { getElementById: id => nodes[id] }, CSS: { escape: value => value },
+    fetch: async () => ({ ok: true, json: async () => menu }),
+  });
+  await new Promise(resolve => setImmediate(resolve));
+  const cards = nodes.menuGrid.innerHTML.split('<article').slice(1);
+  assert.equal(cards.length, 32);
+  for (const card of cards) {
+    const code = card.match(/data-code="([^"]+)"/)[1];
+    const item = menu.find(entry => entry.code === code);
+    // Already the paid price: equal to one 0.7 discount of the comparison price, and displayed as-is.
+    assert.equal(item.price, Math.round(original.find(entry => entry.id === item.id).price * 0.7), code);
+    assert.ok(card.includes(`<span class="price-label">Giá tự lấy thực trả</span><p class="menu-price"><strong>$${item.price}</strong><span class="price-included">Đã gồm ưu đãi</span></p>`), code);
+    assert.equal((card.match(/\$\d+/g) || []).length, 2, code + ': one price, also in the aria-label');
+  }
   for (const [code, [, pickup]] of Object.entries(keeta)) assert.equal(menu.find(item => item.code === code).price, pickup, code);
+  const html = fs.readFileSync(path.join(root, 'vi/index.html'), 'utf8');
+  const note = html.match(/<section class="price-note"[\s\S]*?<\/section>/)[0];
+  assert.ok(html.indexOf('class="price-note"') < html.indexOf('id="menuGrid"'), 'note is above the menu');
+  assert.ok(!/<details/.test(note), 'note is not collapsed');
+  assert.ok(note.includes('Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi giảm 30% cho đơn gọi điện đặt trước.'));
+  const a09 = menu.find(item => item.code === 'A09').price;
+  assert.ok(note.includes(`món A09 giá <b>$${a09}</b> là số tiền bạn trả, đã gồm ưu đãi, không giảm thêm 30%`));
+  assert.ok(note.includes('không áp dụng cho đơn qua ứng dụng giao đồ ăn'));
+  const meta = name => html.match(new RegExp(`<meta (?:name|property)="${name}" content="([^"]+)"`))[1];
+  assert.match(meta('description'), /giá thực trả/);
+  assert.equal(meta('og:url'), 'https://vietbreadhouse.hk/vi/');
+  assert.equal(meta('og:locale'), 'vi_VN');
+  assert.ok(meta('og:description').includes(`A09 trả $${a09}, không giảm thêm`));
+  const tags = [...html.matchAll(/<meta property="(og:[^"]+)"/g)].map(match => match[1]);
+  assert.equal(new Set(tags).size, tags.length, 'no duplicated og tag');
+  // Shares the Chinese image: same file and declared size as the Chinese homepage.
+  const zh = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  for (const name of ['og:image', 'og:image:width', 'og:image:height', 'og:image:type']) assert.equal(meta(name), zh.match(new RegExp(`<meta property="${name}" content="([^"]+)"`))[1]);
+  assert.ok(fs.existsSync(path.join(root, meta('og:image').replace('https://vietbreadhouse.hk/', ''))));
+  assert.match(meta('og:image:alt'), /tiếng Trung/);
+  for (const file of ['vi/index.html', 'vi/js/menu.js', 'vi/css/style.css']) assert.equal(fs.readFileSync(path.join(root, file), 'utf8'), fs.readFileSync(path.join(root, 'public', file), 'utf8'));
 });
 
 test('share preview image: each og tag once, image deployed in both copies and matches its declared size and prices', () => {

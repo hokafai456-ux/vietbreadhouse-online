@@ -23,7 +23,8 @@ test('Vietnamese subsite contains all 32 visible items with consecutive codes an
  assert.match(html,/<html lang="vi">/);
  assert.ok(!/[\u3400-\u9fff]/u.test(html.replace(/<a class="language-top"[\s\S]*?<\/a>/,'')+js));
  assert.match(html,/<a class="language-top" href="\/" lang="zh-Hant" hreflang="zh-Hant" aria-label="中文">/);
- for(const term of ['Phone pickup','Platform reference','70%','30%','platform-price','pickup-price'])assert.ok(!(html+js).includes(term));
+ // The Vietnamese page explains its single paid price; it never shows the platform comparison price.
+ for(const term of ['Phone pickup','Platform reference','70%','platform-price','pickup-price'])assert.ok(!(html+js).includes(term));
  assert.ok(html.includes('menu-a4.pdf'));
  assert.ok(html.includes('tel:+85254888239'));
  assert.ok(js.includes("fetch('menu.json?v=20261025')"));

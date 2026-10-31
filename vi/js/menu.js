@@ -15,7 +15,7 @@
           <span class="menu-card-code">${escape(item.code)}</span>
           <h2 class="menu-card-name">${escape(item.name)}</h2>
           ${item.description?`<p class="menu-card-desc">${escape(item.description)}</p>`:''}
-          <p class="menu-price">$${item.price}</p>
+          <div class="price-box" aria-label="Giá tự lấy thực trả $${item.price}, đã gồm ưu đãi"><span class="price-label">Giá tự lấy thực trả</span><p class="menu-price"><strong>$${item.price}</strong><span class="price-included">Đã gồm ưu đãi</span></p></div>
         </div>
       </article>`).join('');
   }
