@@ -22,7 +22,7 @@ test('requested names and A12 recipe are attached to the original products after
     ['banh-mi-xa-xiu','A02','水晶蹄叉燒法包',68],
     ['banh-mi-xiu-mai','A03','蕃茄肉丸叉燒法包',68],
     ['banh-mi-bo-la-dua-cha-bong','A04','法包屋・斑蘭牛油肉鬆法包',62],
-    ['banh-mi-dac-biet','A05','招牌法包',78],
+    ['banh-mi-dac-biet','A05','水晶蹄番茄肉丸扎肉法包',78],
     ['banh-mi-la-lot','A06','越式荖葉牛肉卷法包',72],
     ['banh-mi-cha-thit-nuong','A08','扎肉烤肉丸雙拼法包',72],
     ['banh-mi-thit-nuong-jambon','A09','招牌越式三寶法包',78],

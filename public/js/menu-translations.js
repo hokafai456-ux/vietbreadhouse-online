@@ -81,10 +81,10 @@ globalThis.VBH_MENU_TRANSLATIONS = Object.freeze({
     "enDesc": "Pandan butter and pork floss in a baguette."
   },
   "banh-mi-dac-biet": {
-    "vi": "Bánh mì đặc biệt",
-    "en": "Signature Baguette",
-    "viDesc": "Giò chả, pa tê, đồ chua và ngò rí.",
-    "enDesc": "Vietnamese pork sausage, pâté, pickles and coriander."
+    "vi": "Bánh mì giò thủ thịt viên sốt cà chua chả",
+    "en": "Jellied Pork Terrine, Tomato Meatball & Vietnamese Pork Sausage Baguette",
+    "viDesc": "Giò thủ, thịt viên nướng và chả.",
+    "enDesc": "Jellied pork terrine, grilled meatballs and Vietnamese pork sausage."
   },
   "banh-mi-thap-cam": {
     "vi": "Bánh mì truyền thống",
