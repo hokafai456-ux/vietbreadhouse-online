@@ -42,7 +42,10 @@ test('requested names and A12 recipe are attached to the original products after
 test('all language catalogs keep the same product identities and codes', () => {
   const vi = JSON.parse(fs.readFileSync(path.join(root, 'vi/menu.json'), 'utf8'));
   assert.deepEqual(vi.map(x => [x.id,x.code]), active.map(x => [x.id,codes[x.id]]));
-  assert.equal(vi.find(x => x.code === 'A09').description, 'Thịt viên nướng, giò thủ và chả.');
+  // Owner correction 2026-11-01: A09/A10 use jambon (not giò thủ) and A09's name ends with chả, matching the staff app.
+  assert.equal(vi.find(x => x.code === 'A09').description, 'Thịt viên nướng, jambon và chả.');
+  assert.equal(vi.find(x => x.code === 'A09').name, 'Bánh mì thịt nướng jambon chả');
+  assert.equal(vi.find(x => x.code === 'A10').description, 'Jambon, hai loại giò chả và chà bông heo.');
   assert.ok(vi.find(x => x.code === 'A06').name.includes('bò'));
   assert.ok(vi.find(x => x.code === 'A08').name.includes('thịt viên nướng'));
 });
