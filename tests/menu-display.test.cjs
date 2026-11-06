@@ -81,7 +81,7 @@ for (const relativePath of ['js/order-app.js', 'public/js/order-app.js']) {
       assert.equal(Number(card.match(/class="pickup-price">.*?<strong>HK\$(\d+)/s)[1]), Math.round(price * 0.7));
     }
     assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-la-lot-20261019.png'));
-    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-fish-cake-20261019.jpg'));
+    assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-fish-cake-20261106.jpg'));
     assert.ok(nodes.menuGrid.innerHTML.includes('images/bun-spring-roll-20261019.jpg'));
     assert.ok(!nodes.menuGrid.innerHTML.includes('香脆豬頸肉'));
     assert.ok(nodes.menuGrid.innerHTML.includes('images/menu-c01-natural-20261020.jpg'));

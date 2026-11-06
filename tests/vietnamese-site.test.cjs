@@ -27,13 +27,13 @@ test('Vietnamese subsite contains all 32 visible items with consecutive codes an
  for(const term of ['Phone pickup','Platform reference','70%','platform-price','pickup-price'])assert.ok(!(html+js).includes(term));
  assert.ok(html.includes('menu-a4.pdf'));
  assert.ok(html.includes('tel:+85254888239'));
- assert.ok(js.includes("fetch('menu.json?v=20261025')"));
+ assert.ok(js.includes("fetch('menu.json?v=20261106')"));
  assert.equal(fs.readFileSync(path.join(root,'CNAME'),'utf8').trim(),'vietbreadhouse.hk');
 });
 test('Vietnamese deployment mirrors every static file and includes printable A4 PDF',()=>{
  const walk=directory=>fs.readdirSync(directory,{withFileTypes:true}).flatMap(entry=>entry.isDirectory()?walk(path.join(directory,entry.name)):[path.join(directory,entry.name)]);
  const files=walk(path.join(root,'vi'));
- assert.equal(files.length,42);
+ assert.equal(files.length,44); // 2026-11-06: new B01/C04 photos (old files kept)
  for(const file of files){assert.deepEqual(fs.readFileSync(file),fs.readFileSync(path.join(root,'public',path.relative(root,file))));}
  assert.equal(fs.readFileSync(path.join(root,'vi/menu-a4.pdf')).subarray(0,4).toString(),'%PDF');
 });
