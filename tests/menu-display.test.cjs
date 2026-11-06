@@ -183,21 +183,21 @@ test('location is above categories and WhatsApp is secondary with collapsed term
   assert.ok(html.indexOf('class="store-location"') < html.indexOf('id="catTabs"'));
   assert.equal((html.match(/H座1樓H08室/g) || []).length, 1);
   assert.ok(html.includes('11:00–19:00'));
-  // Owner rule for the ordering system: WhatsApp only on 9835 0364.
+  // Owner 2026-11-06: both shop numbers take calls and WhatsApp.
   assert.ok(html.includes('https://wa.me/85298350364'));
-  assert.ok(!html.includes('https://wa.me/85254888239'));
+  assert.ok(html.includes('https://wa.me/85254888239'));
   const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)[0];
   const contact = html.match(/<section class="contact-card"[\s\S]*?<\/section>/)[0];
   assert.ok(!hero.includes('wa.me'));
   assert.ok(hero.includes('class="store-location"'));
   assert.ok(hero.includes('class="store-address" href="https://www.google.com/maps/dir/'));
   assert.ok(!html.includes('class="maps-link"'));
-  assert.ok(contact.includes('https://wa.me/85298350364'));
+  assert.ok(contact.includes('https://wa.me/85298350364') && contact.includes('https://wa.me/85254888239'));
   assert.ok(contact.includes('class="back-to-menu" href="#menu">↑ 返回餐牌</a>'));
   assert.ok(!contact.includes('tel:'));
   assert.ok(html.indexOf('class="contact-card"') > html.indexOf('id="menuGrid"'));
-  // Owner 2026-11-06: confirm by phone 5488 8239 or WhatsApp 9835 0364; about 10 minutes.
-  assert.ok(html.includes('網上落單後，請致電 5488 8239 或 WhatsApp 9835 0364 報上訂單號確認；確認後一般約 10 分鐘可取餐，到店付款。'));
+  // Owner 2026-11-06: confirm by calling or WhatsApp on either number; about 10 minutes.
+  assert.ok(html.includes('網上落單後，請致電或 WhatsApp 5488 8239 / 9835 0364 報上訂單號確認；確認後一般約 10 分鐘可取餐，到店付款。'));
   assert.ok(!html.includes('自動接單'));
   assert.ok(html.includes('https://www.google.com/maps/dir/?api=1&amp;destination='));
   assert.ok(!html.includes('<iframe'));

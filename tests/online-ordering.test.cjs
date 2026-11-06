@@ -15,8 +15,8 @@ for (const page of ['index.html', 'vi/index.html']) {
     assert.ok(html.indexOf('id="menuGrid"') < html.indexOf('id="vbh-ordering-root"'), 'add-on loads after the original menu');
     assert.ok(!html.includes(API), 'no link to the separate ordering site');
     assert.ok(!html.includes('order-online'), 'old jump button removed');
-    assert.ok(!html.includes('wa.me/85254888239'), 'WhatsApp only on 9835 0364');
-    assert.ok(html.includes(page === 'index.html' ? '網上落單後，請致電 5488 8239 或 WhatsApp 9835 0364 報上訂單號確認；確認後一般約 10 分鐘可取餐，到店付款。' : 'vui lòng gọi 5488 8239 hoặc nhắn WhatsApp 9835 0364 kèm mã đơn để xác nhận'), 'after-order contact line');
+    assert.ok(html.includes('wa.me/85254888239') && html.includes('wa.me/85298350364'), 'WhatsApp on both shop numbers');
+    assert.ok(html.includes(page === 'index.html' ? '網上落單後，請致電或 WhatsApp 5488 8239 / 9835 0364 報上訂單號確認；確認後一般約 10 分鐘可取餐，到店付款。' : 'vui lòng gọi hoặc nhắn WhatsApp 5488 8239 / 9835 0364 kèm mã đơn để xác nhận'), 'after-order contact line');
     assert.equal(html, read(path.join('public', page)));
   });
 }
