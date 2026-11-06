@@ -20,6 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css?v=15">
+  <link rel="stylesheet" href="/ordering-assets/ordering-addon.css?v=20261106">
 </head>
 <body>
   <header class="app-header">
@@ -44,8 +45,8 @@
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <p class="hero-sub">越南法包外賣專門</p>
-      <h1 id="hero-title">電話落單・到店自取</h1>
-      <a class="call-hero" href="tel:+85254888239">致電落單 5488 8239</a>
+      <h1 id="hero-title">網上選餐・到店自取</h1>
+      <a class="call-hero" href="tel:+85254888239">致電落單／查詢 5488 8239</a>
       <p class="hero-backup">如未能接通，請致電 <a href="tel:+85298350364">9835 0364</a></p>
       <div class="store-location" aria-label="營業時間及自取地址">
         <p class="store-hours">11:00–19:00 <span>｜星期日休息</span></p>
@@ -60,7 +61,7 @@
         <p class="offer-example">例：招牌越式三寶法包　自取實付 <b>HK$55</b>，已計優惠，不再另打七折。</p>
         <details class="offer-details">
           <summary>優惠詳情</summary>
-          <p>七折優惠只適用於直接致電本店落單並到店自取；不適用於外賣平台訂單，亦不能與平台優惠合併使用。</p>
+          <p>七折優惠適用於本店網上落單或電話落單後到店自取；不適用於外賣平台訂單，亦不能與平台優惠合併使用。</p>
           <p>自取實付價按每款菜式外賣平台售價七折後四捨五入至整數港元，以餐牌列明嘅自取實付價為準。</p>
         </details>
       </div>
@@ -89,10 +90,10 @@
     <section class="contact-card" id="whatsapp-inquiry" aria-labelledby="contact-title">
       <h2 id="contact-title">唔方便致電？</h2>
       <div class="contact-actions">
-        <p class="whatsapp-secondary"><a href="https://wa.me/85254888239" target="_blank" rel="noopener noreferrer">WhatsApp 查詢 ↗</a></p>
+        <p class="whatsapp-secondary"><a href="https://wa.me/85298350364" target="_blank" rel="noopener noreferrer">WhatsApp 查詢 ↗</a></p>
         <a class="back-to-menu" href="#menu">↑ 返回餐牌</a>
       </div>
-      <p class="whatsapp-note">收到訊息後，我們會盡快回覆確認；如趕時間，歡迎直接致電。</p>
+      <p class="whatsapp-note">網單提交成功後自動接單，請按所選時間到店取餐付款。查詢請提供訂單號。</p>
     </section>
 
     <section class="social-card" aria-labelledby="social-title">
@@ -114,9 +115,11 @@
   </main>
 
   <footer>
-    瀏覽餐牌後請致電落單，再到店自取。
+    網單提交成功後自動接單，請按所選時間到店取餐付款。
   </footer>
 
   <script src="js/order-app.js?v=33"></script>
+  <div id="vbh-ordering-root"></div>
+  <script defer src="/ordering-assets/ordering-addon.js?v=20261106"></script>
 </body>
 </html>

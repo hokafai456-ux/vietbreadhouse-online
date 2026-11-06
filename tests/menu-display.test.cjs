@@ -161,12 +161,14 @@ test('social links stay correct and prominent at the bottom', () => {
   assert.ok(html.includes('class="social-link social-instagram"'));
 });
 
-test('discount and phone-first ordering remain, without old translation scripts', () => {
+test('discount, phone ordering and on-page online ordering remain, without old translation scripts', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   assert.ok(html.includes('不適用於外賣平台訂單，亦不能與平台優惠合併使用'));
   assert.ok(html.includes('七折後四捨五入至整數港元'));
   assert.ok(!html.includes('網站暫不提供網上落單及付款'));
-  assert.ok(html.includes('電話落單・到店自取'));
+  // Owner-approved auto-accept wording (2026-11-05), the same text pages.dev serves.
+  assert.ok(html.includes('網上選餐・到店自取'));
+  assert.ok(html.includes('致電落單／查詢 5488 8239'));
   for (const removed of ['js/menu-translations.js', 'offer-translation', 'menu-intro-translation', 'menu-languages', 'language-switch']) assert.ok(!html.includes(removed));
   assert.equal((html.match(/\slang="vi"/g)||[]).length,1, 'Vietnamese language tag is only used on the new site entry');
 });
@@ -181,18 +183,20 @@ test('location is above categories and WhatsApp is secondary with collapsed term
   assert.ok(html.indexOf('class="store-location"') < html.indexOf('id="catTabs"'));
   assert.equal((html.match(/H座1樓H08室/g) || []).length, 1);
   assert.ok(html.includes('11:00–19:00'));
-  assert.ok(html.includes('https://wa.me/85254888239'));
+  // Owner rule for the ordering system: WhatsApp only on 9835 0364.
+  assert.ok(html.includes('https://wa.me/85298350364'));
+  assert.ok(!html.includes('https://wa.me/85254888239'));
   const hero = html.match(/<section class="hero"[\s\S]*?<\/section>/)[0];
   const contact = html.match(/<section class="contact-card"[\s\S]*?<\/section>/)[0];
   assert.ok(!hero.includes('wa.me'));
   assert.ok(hero.includes('class="store-location"'));
   assert.ok(hero.includes('class="store-address" href="https://www.google.com/maps/dir/'));
   assert.ok(!html.includes('class="maps-link"'));
-  assert.ok(contact.includes('https://wa.me/85254888239'));
+  assert.ok(contact.includes('https://wa.me/85298350364'));
   assert.ok(contact.includes('class="back-to-menu" href="#menu">↑ 返回餐牌</a>'));
   assert.ok(!contact.includes('tel:'));
   assert.ok(html.indexOf('class="contact-card"') > html.indexOf('id="menuGrid"'));
-  assert.ok(html.includes('收到訊息後，我們會盡快回覆確認；如趕時間，歡迎直接致電。'));
+  assert.ok(html.includes('網單提交成功後自動接單，請按所選時間到店取餐付款。查詢請提供訂單號。'));
   assert.ok(html.includes('https://www.google.com/maps/dir/?api=1&amp;destination='));
   assert.ok(!html.includes('<iframe'));
   assert.ok(!html.includes('hero-copy'));

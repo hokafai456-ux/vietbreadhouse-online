@@ -225,6 +225,3 @@ footer { padding: 20px; color: #8a766d; background: #f5eee7; text-align: center;
   .social-link { transition: none; }
   .social-link:hover { transform: none; }
 }
-
-.call-hero.order-online { margin-left: 10px; background: var(--brand); color: #fff; border: 2px solid #fff; }
-@media (max-width: 420px) { .call-hero.order-online { margin-left: 0; } }

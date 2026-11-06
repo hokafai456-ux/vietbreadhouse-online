@@ -86,7 +86,8 @@ test('Vietnamese page: every card labels its unchanged paid price, and the visib
   const note = html.match(/<section class="price-note"[\s\S]*?<\/section>/)[0];
   assert.ok(html.indexOf('class="price-note"') < html.indexOf('id="menuGrid"'), 'note is above the menu');
   assert.ok(!/<details/.test(note), 'note is not collapsed');
-  assert.ok(note.includes('Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi giảm 30% cho đơn gọi điện đặt trước.'));
+  assert.ok(note.includes('Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi giảm 30%.'));
+  assert.ok(note.includes('Đặt món trực tuyến hoặc gọi điện đặt rồi tự đến lấy'));
   const a09 = menu.find(item => item.code === 'A09').price;
   assert.ok(note.includes(`món A09 giá <b>$${a09}</b> là số tiền bạn trả, đã gồm ưu đãi, không giảm thêm 30%`));
   assert.ok(note.includes('không áp dụng cho đơn qua ứng dụng giao đồ ăn'));

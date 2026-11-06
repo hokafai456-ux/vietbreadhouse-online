@@ -4,14 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#6f2f1e">
-  <meta name="description" content="Thực đơn Nhà Bánh Mì Việt. Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi gọi điện đặt trước. Gọi 5488 8239 hoặc 9835 0364.">
+  <meta name="description" content="Thực đơn Nhà Bánh Mì Việt. Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi. Đơn trực tuyến được tự động nhận khi gửi thành công.">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Nhà Bánh Mì Việt · Viet Bread House">
   <meta property="og:url" content="https://vietbreadhouse.hk/vi/">
   <meta property="og:locale" content="vi_VN">
   <meta property="og:locale:alternate" content="zh_HK">
   <meta property="og:title" content="Nhà Bánh Mì Việt · Thực đơn | Giá niêm yết là giá thực trả">
-  <meta property="og:description" content="Giá tự lấy trên thực đơn đã gồm ưu đãi giảm 30% khi gọi điện đặt trước. Ví dụ: món A09 trả $55, không giảm thêm. Gọi 5488 8239 / 9835 0364.">
+  <meta property="og:description" content="Giá tự lấy trên thực đơn đã gồm ưu đãi giảm 30%. Ví dụ: món A09 trả $55, không giảm thêm. Đơn trực tuyến được tự động nhận khi gửi thành công.">
+  <!-- Shares the Chinese-language preview image; a Vietnamese version has not been made. -->
   <!-- Shares the Chinese-language preview image; a Vietnamese version has not been made. -->
   <meta property="og:image" content="https://vietbreadhouse.hk/images/og-price-20261101.jpg">
   <meta property="og:image:width" content="1200">
@@ -19,8 +20,10 @@
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:alt" content="Ảnh chữ tiếng Trung: Nhà Bánh Mì Việt, bánh mì A09 giá tự lấy thực trả $55, đã gồm ưu đãi giảm 30%; giá trên ứng dụng giao đồ ăn $78.">
   <title>Nhà Bánh Mì Việt - Thực đơn</title>
-  <link rel="stylesheet" href="css/style.css?v=3">
-  <script src="js/menu.js?v=3" defer></script>
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/menu.js?v=4" defer></script>
+  <link rel="stylesheet" href="/ordering-assets/ordering-addon.css?v=20261106">
 </head>
 <body>
   <header class="app-header">
@@ -34,14 +37,14 @@
         <span aria-hidden="true">|</span>
         <a href="#whatsapp-inquiry">WhatsApp</a>
         <span aria-hidden="true">|</span>
-        <a class="language-top" href="/" lang="zh-Hant" hreflang="zh-Hant" aria-label="中文"><span>中文</span><span class="language-flag" aria-hidden="true">🇭🇰</span></a>
+        <a class="language-top" href="/#menu" lang="zh-Hant" hreflang="zh-Hant" aria-label="中文"><span>中文</span><span class="language-flag" aria-hidden="true">🇭🇰</span></a>
       </nav>
     </div>
   </header>
   <main>
     <section class="hero" aria-labelledby="hero-title">
       <p class="hero-sub">Bánh mì Việt Nam</p>
-      <h1 id="hero-title">Gọi điện đặt món</h1>
+      <h1 id="hero-title">Đặt món trực tuyến</h1>
       <a class="call-hero" href="tel:+85254888239">Gọi 5488 8239</a>
       <p class="hero-backup">Nếu chưa liên lạc được, vui lòng gọi <a href="tel:+85298350364">9835 0364</a></p>
       <div class="store-location" aria-label="Giờ mở cửa và địa chỉ">
@@ -52,9 +55,10 @@
     <section class="price-note" aria-label="Giải thích giá">
       <span class="price-note-badge" aria-hidden="true">Giá<br>thực trả</span>
       <div>
-        <strong>Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi giảm 30% cho đơn gọi điện đặt trước.</strong>
+        <strong>Giá niêm yết là giá thực trả khi tự đến lấy, đã gồm ưu đãi giảm 30%.</strong>
         <p class="price-note-example">Ví dụ: món A09 giá <b>$55</b> là số tiền bạn trả, đã gồm ưu đãi, không giảm thêm 30%.</p>
-        <p class="price-note-terms">Chỉ áp dụng khi gọi điện đặt và tự đến lấy; không áp dụng cho đơn qua ứng dụng giao đồ ăn.</p>
+        <p class="price-note-terms">Đặt món trực tuyến hoặc gọi điện đặt rồi tự đến lấy; không áp dụng cho đơn qua ứng dụng giao đồ ăn.</p>
+        <p><a href="#menu" style="display:inline-flex;min-height:44px;align-items:center;font-weight:700;text-decoration:underline">Chọn món bên dưới →</a></p>
       </div>
     </section>
     <div id="menu"><nav class="cat-tabs" id="catTabs" aria-label="Danh mục món"></nav></div>
@@ -73,8 +77,8 @@
     </details>
     <section class="contact-card" id="whatsapp-inquiry" aria-labelledby="contact-title">
       <h2 id="contact-title">Không tiện gọi điện?</h2>
-      <div class="contact-actions"><a class="whatsapp-link" href="https://wa.me/85254888239" target="_blank" rel="noopener noreferrer">Nhắn WhatsApp ↗</a><a class="back-to-menu" href="#menu">↑ Về thực đơn</a></div>
-      <p class="whatsapp-note">Chúng tôi sẽ trả lời và xác nhận sớm nhất có thể. Nếu cần gấp, bạn vui lòng gọi điện nhé.</p>
+      <div class="contact-actions"><a class="whatsapp-link" href="https://wa.me/85298350364" target="_blank" rel="noopener noreferrer">WhatsApp 9835 0364 ↗</a><a class="back-to-menu" href="#menu">↑ Về thực đơn</a></div>
+      <p class="whatsapp-note">Đơn được tự động nhận khi gửi thành công. Vui lòng đến lấy món, thanh toán theo giờ đã chọn. Hãy cung cấp mã đơn khi cần hỏi.</p>
     </section>
     <section class="social-card" aria-labelledby="social-title">
       <h2 id="social-title">Theo dõi Nhà Bánh Mì Việt</h2>
@@ -86,5 +90,7 @@
     </section>
   </main>
   <footer><p>Gọi 5488 8239 để đặt món.</p><a href="menu-a4.pdf" download>Tải thực đơn A4</a><span class="currency-note">HKD</span></footer>
+  <div id="vbh-ordering-root"></div>
+  <script defer src="/ordering-assets/ordering-addon.js?v=20261106"></script>
 </body>
 </html>
