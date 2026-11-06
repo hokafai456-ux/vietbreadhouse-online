@@ -10,12 +10,13 @@ for (const page of ['index.html', 'vi/index.html']) {
   test(`${page}: ordering is on the page itself, with no button that jumps to another site`, () => {
     const html = read(page);
     assert.equal((html.match(/<div id="vbh-ordering-root"><\/div>/g) || []).length, 1);
-    assert.match(html, /<link rel="stylesheet" href="\/ordering-assets\/ordering-addon\.css\?v=\d{8}">/);
-    assert.match(html, /<script defer src="\/ordering-assets\/ordering-addon\.js\?v=\d{8}"><\/script>/);
+    assert.match(html, /<link rel="stylesheet" href="\/ordering-assets\/ordering-addon\.css\?v=\d{8,10}">/);
+    assert.match(html, /<script defer src="\/ordering-assets\/ordering-addon\.js\?v=\d{8,10}"><\/script>/);
     assert.ok(html.indexOf('id="menuGrid"') < html.indexOf('id="vbh-ordering-root"'), 'add-on loads after the original menu');
     assert.ok(!html.includes(API), 'no link to the separate ordering site');
     assert.ok(!html.includes('order-online'), 'old jump button removed');
     assert.ok(!html.includes('wa.me/85254888239'), 'WhatsApp only on 9835 0364');
+    assert.ok(html.includes(page === 'index.html' ? '落單後如需更改或查詢，請致電 5488 8239 或 WhatsApp 9835 0364，並提供訂單號。' : 'vui lòng gọi 5488 8239 hoặc nhắn WhatsApp 9835 0364 kèm mã đơn.'), 'after-order contact line');
     assert.equal(html, read(path.join('public', page)));
   });
 }
@@ -33,7 +34,7 @@ test('ordering add-on is deployed in both copies and sends API calls to the Clou
 test('order status links (/order/<id>) open the ordering shell; other unknown paths go back to the menu', () => {
   const html = read('404.html');
   assert.ok(html.includes('id="vbh-ordering-root"'));
-  assert.match(html, /<script defer src="\/ordering-assets\/ordering-addon\.js\?v=\d{8}"><\/script>/);
+  assert.match(html, /<script defer src="\/ordering-assets\/ordering-addon\.js\?v=\d{8,10}"><\/script>/);
   const guard = html.match(/<script>if\(!new RegExp\("([^"]+)"\)\.test\(location\.pathname\)\)location\.replace\("\/"\);<\/script>/);
   assert.ok(guard, 'redirect guard present');
   const pattern = new RegExp(guard[1]);
