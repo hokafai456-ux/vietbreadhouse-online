@@ -196,7 +196,9 @@ test('location is above categories and WhatsApp is secondary with collapsed term
   assert.ok(contact.includes('class="back-to-menu" href="#menu">↑ 返回餐牌</a>'));
   assert.ok(!contact.includes('tel:'));
   assert.ok(html.indexOf('class="contact-card"') > html.indexOf('id="menuGrid"'));
-  assert.ok(html.includes('網單提交成功後自動接單，請按所選時間到店取餐付款。落單後如需更改或查詢，請致電 5488 8239 或 WhatsApp 9835 0364，並提供訂單號。'));
+  // Owner 2026-11-06: confirm by phone 5488 8239 or WhatsApp 9835 0364; about 10 minutes.
+  assert.ok(html.includes('網上落單後，請致電 5488 8239 或 WhatsApp 9835 0364 報上訂單號確認；確認後一般約 10 分鐘可取餐，到店付款。'));
+  assert.ok(!html.includes('自動接單'));
   assert.ok(html.includes('https://www.google.com/maps/dir/?api=1&amp;destination='));
   assert.ok(!html.includes('<iframe'));
   assert.ok(!html.includes('hero-copy'));
